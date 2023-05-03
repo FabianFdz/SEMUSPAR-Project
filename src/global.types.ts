@@ -16,7 +16,8 @@ export interface Encargado extends Persona {
 }
 
 export interface Estudiante extends Persona {
-  FechaNacimiento: Date;
+  id?: string;
+  FechaNacimiento: string;
   FechaMatricula: string;
   Estado: boolean;
   EstadoComentario?: string;
@@ -27,11 +28,11 @@ export interface Estudiante extends Persona {
   TipoAdecuacion?: string;
   Trabaja: boolean;
   ConsideracionesMedicas?: string;
-  Enfermedaded?: string;
+  Enfermedades?: string;
   Direccion: string;
   Instrumento: string;
   Docente: string;
-  Madre: Encargado;
-  Padre: Encargado;
-  DatosFacturacion: Persona;
+  Madre?: Encargado;
+  Padre?: Encargado;
+  DatosFacturacion?: Persona;
 }

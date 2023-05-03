@@ -5,7 +5,8 @@ const chance = new Chance();
 const estudiantes: Estudiante[] = [];
 for (let i = 0; i < 40; i++) {
   estudiantes.push({
-    FechaMatricula: chance.date().toLocaleString(),
+    id: chance.guid(),
+    FechaMatricula: new Date().toDateString(), //chance.birthday().toLocaleString(),
     Estado: chance.bool(),
     EstadoComentario: chance.bool() ? chance.sentence() : undefined,
     FechaRetiro: chance.bool() ? chance.date().toLocaleString() : undefined,
@@ -17,17 +18,17 @@ for (let i = 0; i < 40; i++) {
     TipoAdecuacion: chance.bool()
       ? chance.pickone(["Visual", "Auditiva", "Motora"])
       : undefined,
-    Enfermedad: chance.bool()
+    Enfermedades: chance.bool()
       ? chance.pickone(["Diabetes", "Asma", "Epilepsia"])
       : undefined,
-    TipoEnfermedad: chance.bool() ? chance.sentence() : undefined,
+    ConsideracionesMedicas: chance.bool() ? chance.sentence() : undefined,
     Direccion: chance.address(),
     Instrumento: chance.pickone(["Guitarra", "Piano", "Violín"]),
     Docente: chance.name(),
     Nombre: chance.name(),
-    Apellidos: chance.last(),
+    Apellidos: `${chance.last()} ${chance.last()}`,
     Cedula: chance.ssn(),
-    FechaNacimiento: chance.birthday(),
+    FechaNacimiento: chance.birthday().toLocaleDateString(),
     Trabaja: chance.bool(),
     CorreoElectronico: chance.email(),
     Telefono: chance.phone(),
