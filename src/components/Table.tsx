@@ -50,7 +50,6 @@ export default function Table({ data, columns }: TableProps) {
                           </th>
                         );
                       })}
-                      <th className="group px-6 py-3 text-left text-reg font-medium text-gray-500 uppercase tracking-wider" />
                     </tr>
                   ))}
                 </thead>
@@ -71,11 +70,6 @@ export default function Table({ data, columns }: TableProps) {
                             </td>
                           );
                         })}
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <Link href={`/estudiantes/${row.getValue("cedula")}`}>
-                            <PencilSquare className="h-5 w-5" />
-                          </Link>
-                        </td>
                       </tr>
                     );
                   })}

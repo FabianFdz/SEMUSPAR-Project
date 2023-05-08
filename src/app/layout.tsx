@@ -1,8 +1,7 @@
-import Link from "next/link";
 import "./globals.css";
 import { Red_Hat_Display } from "next/font/google";
 import Footer from "@/components/Footer";
-import Menu from "@/components/menu";
+import Menu from "@/components/Menu";
 
 const tajawal = Red_Hat_Display({
   weight: ["300", "400", "500", "600", "700", "800", "900"],

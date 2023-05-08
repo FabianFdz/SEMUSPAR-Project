@@ -1,16 +1,15 @@
-import { useState } from "react";
-import { Estudiante } from "@/global.types";
 import { UseFormRegister } from "react-hook-form";
 import styles from "./form.module.scss";
 import { Input } from "../fields";
+import { Estudiante } from "@prisma/client";
 
 interface EducacionProps {
   register: UseFormRegister<Estudiante>;
-  adecuacion: boolean;
-  trabaja: boolean;
+  adecuacion: boolean | null;
+  trabaja: boolean | null;
 }
 
-export default function Educacion({
+export default function EducacionForm({
   register,
   adecuacion,
   trabaja,
@@ -19,46 +18,17 @@ export default function Educacion({
     <section id="educacion" className={`${styles.educacionForm}`}>
       <h3 className="text-md border-b w-full mb-3">Educación</h3>
       <div className="flex space-x-4 justify-start">
-        <div className="space-y-1 flex flex-col">
-          <label htmlFor="grado-academico">Grado Académico</label>
-          <div className="inline-block relative w-full">
-            <select
-              {...register("GradoAcademico")}
-              placeholder="Selecciona un grado académico"
-            >
-              <option disabled>Selecciona un grado académico</option>
-              <option>N/A</option>
-              <option>Preescolar</option>
-              <option>Primaria</option>
-              <option>Secundaria</option>
-              <option>Bachillerato</option>
-              <option>Licenciatura</option>
-              <option>Maestría</option>
-              <option>Doctorado</option>
-            </select>
-            <div className={`${styles.selectIcon}`}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
+        <Input
+          label="Grado Académico"
+          register={register}
+          placeholder="Bachillerato, escuela, colegio..."
+          name="grado_academico"
+        />
         <Input
           label="Institución Académica"
           register={register}
           placeholder="Técnológico de Costa Rica..."
-          name="InstitucionAcademica"
+          name="institucion_academica"
         />
       </div>
       <div className="flex space-x-4 justify-start">
@@ -71,11 +41,11 @@ export default function Educacion({
               id="trabaja"
               title="trabaja"
               placeholder="trabaja"
-              {...register("Trabaja")}
+              {...register("trabaja")}
             />
             <div
-              className={`relative w-16 h-8 rounded-full duration-300 ease-in-out ${
-                trabaja ? "bg-blue-500" : "bg-gray-200"
+              className={`relative w-16 h-8 rounded-full cursor-pointer duration-300 ease-in-out ${
+                trabaja ? "bg-blue-600" : "bg-gray-200"
               }`}
             >
               <div
@@ -90,7 +60,7 @@ export default function Educacion({
           label="Lugar de Trabajo"
           register={register}
           disabled={!trabaja}
-          name="LugarDeTrabajo"
+          name="lugar_trabajo"
         />
       </div>
       <div className="flex space-x-4 justify-start">
@@ -103,11 +73,11 @@ export default function Educacion({
               id="adecuacion"
               title="adecuacion"
               placeholder="adecuacion"
-              {...register("Adecuacion")}
+              {...register("adecuacion")}
             />
             <div
-              className={`relative w-16 h-8 rounded-full duration-300 ease-in-out ${
-                adecuacion ? "bg-blue-500" : "bg-gray-200"
+              className={`relative w-16 h-8 rounded-full cursor-pointer duration-300 ease-in-out ${
+                adecuacion ? "bg-blue-600" : "bg-gray-200"
               }`}
             >
               <div
@@ -123,7 +93,7 @@ export default function Educacion({
           register={register}
           disabled={!adecuacion}
           placeholder="Déficit de atención, ..."
-          name="TipoAdecuacion"
+          name="tipo_adecuacion"
         />
       </div>
     </section>

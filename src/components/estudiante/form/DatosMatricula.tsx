@@ -1,8 +1,7 @@
-import { useState } from "react";
-import { Estudiante } from "@/global.types";
-import { UseFormRegister } from "react-hook-form";
-import styles from "./form.module.scss";
 import { Input } from "../fields";
+import styles from "./form.module.scss";
+import { Estudiante } from "@prisma/client";
+import { UseFormRegister } from "react-hook-form";
 
 interface EducacionProps {
   register: UseFormRegister<Estudiante>;
@@ -14,6 +13,10 @@ export default function DatosMatricula({ register, estado }: EducacionProps) {
     <section id="educacion" className={`${styles.educacionForm}`}>
       <h3 className="text-md border-b w-full mb-3">Datos de Matrícula</h3>
       <div className="flex space-x-4 justify-start">
+        <Input name="docente" register={register} label="Docente" />
+        <Input name="instrumento" register={register} label="Instrumento" />
+      </div>
+      <div className="flex space-x-4 justify-start">
         <div className="space-y-1 w-32 text-center">
           <label htmlFor="adecuacion">Estado</label>
           <label className="flex items-center justify-center py-1">
@@ -23,11 +26,11 @@ export default function DatosMatricula({ register, estado }: EducacionProps) {
               id="estado"
               title="estado"
               placeholder="estado"
-              {...register("Estado")}
+              {...register("estado")}
             />
             <div
-              className={`relative w-16 h-8 rounded-full duration-300 ease-in-out ${
-                estado ? "bg-blue-500" : "bg-gray-200"
+              className={`relative w-16 h-8 rounded-full cursor-pointer duration-300 ease-in-out ${
+                estado ? "bg-blue-600" : "bg-gray-200"
               }`}
             >
               <div
@@ -42,17 +45,17 @@ export default function DatosMatricula({ register, estado }: EducacionProps) {
           label="Comentario sobre retiro"
           register={register}
           disabled={estado}
-          name="EstadoComentario"
+          name="estado_comentario"
         />
         <Input
           disabled
           register={register}
-          name="FechaMatricula"
+          name="fecha_matricula"
           label="Fecha de Matrícula"
         />
         <Input
           disabled
-          name="FechaRetiro"
+          name="fecha_retiro"
           register={register}
           label="Fecha de Retiro"
         />

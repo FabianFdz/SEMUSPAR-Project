@@ -1,37 +1,28 @@
 import styles from "./form.module.scss";
-import { Estudiante } from "@/global.types";
 import { UseFormRegister } from "react-hook-form";
-import { Input } from "../fields";
+import { Estudiante, Facturacion } from "@prisma/client";
+import { InputFacturacion } from "../fields/InputFacturacion";
 
 interface FacturacionProps {
-  register: UseFormRegister<Estudiante>;
+  register: UseFormRegister<Facturacion>;
 }
 
-export default function Facturacion({ register }: FacturacionProps) {
+export function FacturacionForm({ register }: FacturacionProps) {
   return (
     <section id="facturacion" className={`${styles.facturacionForm}`}>
       <h3 className="text-md border-b w-full mb-3">Facturación</h3>
       <div className="flex space-x-4 justify-start">
-        <Input
-          label="Cédula"
-          register={register}
-          name={`DatosFacturacion.Cedula`}
-        />
-        <Input
+        <InputFacturacion label="Cédula" register={register} name="cedula" />
+        <InputFacturacion
           label="Nombre"
           register={register}
-          name={`DatosFacturacion.Nombre`}
+          name="nombre_completo"
         />
-        <Input
-          label="Apellidos"
-          register={register}
-          name={`DatosFacturacion.Apellidos`}
-        />
-        <Input
+        <InputFacturacion
           label="Correo Electrónico"
           register={register}
           type="email"
-          name={`DatosFacturacion.CorreoElectronico`}
+          name="email"
         />
       </div>
     </section>

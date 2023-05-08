@@ -1,72 +1,62 @@
-import dayjs from "dayjs";
-import "dayjs/locale/es-mx";
-import relativeTime from "dayjs/plugin/relativeTime";
-import localizedFormat from "dayjs/plugin/localizedFormat";
 import { StatusChip } from "@/components/StatusChip";
 import { createColumnHelper } from "@tanstack/react-table";
-import { calculateAge } from "@/utils/personaUtils";
 import FechaMatriculaCol from "./FechaMatriculaCol";
 import FechaRetiroCol from "./FechaRetiroCol";
 import { EstudiantesInfoTable } from "../EstudiantesList";
-
-dayjs.extend(relativeTime);
-dayjs.extend(localizedFormat);
-dayjs.locale("es-mx");
-
-const dateFormat = "DD/MMMM/YYYY";
+import NombreCol from "./NombreCol";
+import FechaNacimientoCol from "./FechaNacimientoCol";
+import Header from "./Header";
+import Link from "next/link";
 
 const columnHelper = createColumnHelper<EstudiantesInfoTable>();
 export const estudiantesColumnsDef = [
+  columnHelper.accessor((row) => row.id, {
+    id: "id",
+    cell: (info) => (
+      <Link
+        className="text-blue-600"
+        href={`/estudiantes/${info.row.original.cedula}`}
+      >
+        #{info.getValue()}
+      </Link>
+    ),
+    header: () => <Header text="ID" />,
+  }),
   columnHelper.accessor((row) => row.estado, {
     id: "estado",
     cell: (info) => <StatusChip active={info.getValue()} />,
-    header: () => <span className="font-normal uppercase">Estado</span>,
+    header: () => <Header text="Estado" />,
   }),
   columnHelper.accessor((row) => row.fecha_matricula, {
     id: "fecha_matricula",
     cell: (info) => <FechaMatriculaCol fechaMatricula={info.getValue()} />,
-    header: () => <span className="font-normal uppercase">Matrícula</span>,
+    header: () => <Header text="Matrícula" />,
   }),
   columnHelper.accessor((row) => row.fecha_retiro, {
     id: "fecha_retiro",
-    cell: (info) => {
-      const fechaRetiro = info.getValue();
-      return <FechaRetiroCol fechaRetiro={info.getValue()} />;
-    },
-    header: () => <span className="font-normal uppercase">Retiro</span>,
+    cell: (info) => <FechaRetiroCol fechaRetiro={info.getValue()} />,
+    header: () => <Header text="Retiro" />,
   }),
   columnHelper.accessor((row) => row.cedula, {
     id: "cedula",
     cell: (info) => <p>{info.getValue()}</p>,
-    header: () => <span className="font-normal uppercase">Cédula</span>,
+    header: () => <Header text="Cédula" />,
   }),
   columnHelper.accessor((row) => row.nombre, {
     id: "nombre",
     cell: (info) => (
-      <div>
-        <p>{info.getValue()}</p>
-        <p className="text-gray-400">{info.row.original.email}</p>
-      </div>
+      <NombreCol email={info.row.original.email} nombre={info.getValue()} />
     ),
-    header: () => <span className="font-normal uppercase">Nombre</span>,
+    header: () => <Header text="Nombre" />,
   }),
   columnHelper.accessor((row) => row.apellidos, {
     id: "apellidos",
     cell: (info) => <p>{info.getValue()}</p>,
-    header: () => <span className="font-normal uppercase">Apellidos</span>,
+    header: () => <Header text="Apellidos" />,
   }),
   columnHelper.accessor((row) => row.fecha_nacimiento, {
     id: "fecha_nacimiento",
-    cell: (info) => (
-      <div>
-        <p className="capitalize">
-          {dayjs(info.getValue()).format(dateFormat)}
-        </p>
-        <p className="text-gray-400">{calculateAge(info.getValue())} años</p>
-      </div>
-    ),
-    header: () => (
-      <span className="font-normal uppercase">Fecha de Nacimiento</span>
-    ),
+    cell: (info) => <FechaNacimientoCol fechaNacimiento={info.getValue()} />,
+    header: () => <Header text="Fecha de Nacimiento" />,
   }),
 ];

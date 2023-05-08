@@ -1,7 +1,7 @@
-import styles from "./form.module.scss";
-import { Estudiante } from "@/global.types";
-import { UseFormRegister } from "react-hook-form";
 import { Input } from "../fields";
+import styles from "./form.module.scss";
+import { Estudiante } from "@prisma/client";
+import { UseFormRegister } from "react-hook-form";
 
 interface DatosPersonalesProps {
   register: UseFormRegister<Estudiante>;
@@ -12,28 +12,28 @@ export default function DatosPersonales({ register }: DatosPersonalesProps) {
     <section id="datos-personales" className={`${styles.datosPersonalesForm}`}>
       <h3 className="text-md border-b w-full mb-3">Datos Personales</h3>
       <div className="flex space-x-4 justify-start">
-        <Input label="Cédula" register={register} name={`Cedula`} />
-        <Input label="Nombre" register={register} name={`Nombre`} />
-        <Input label="Apellidos" register={register} name={`Apellidos`} />
+        <Input label="Cédula" register={register} name="cedula" />
+        <Input label="Nombre" register={register} name="nombre" />
+        <Input label="Apellidos" register={register} name="apellidos" />
       </div>
-      <div className="flex space-x-4 justify-between">
+      <div className="flex space-x-4 justify-start">
         <Input
           label="Fecha de Nacimiento"
           register={register}
           type="date"
-          name={`FechaNacimiento`}
+          name="fecha_nacimiento"
         />
         <Input
           label="Teléfono"
           register={register}
           type="tel"
-          name={`Telefono`}
+          name="telefono"
         />
         <Input
           label="Correo Electrónico"
           register={register}
           type="email"
-          name={`CorreoElectronico`}
+          name="email"
         />
       </div>
       <div className="flex space-x-5 justify-start">
@@ -44,7 +44,7 @@ export default function DatosPersonales({ register }: DatosPersonalesProps) {
           <textarea
             id="consideraciones-medicas"
             rows={5}
-            {...register("ConsideracionesMedicas")}
+            {...register("consideraciones_medicas")}
             placeholder="Toma medicamentos, debe caminar cada 20 min, debe tomar pastilla cada 3 horas..."
           />
         </div>
@@ -53,8 +53,17 @@ export default function DatosPersonales({ register }: DatosPersonalesProps) {
           <textarea
             id="enfermedades"
             rows={5}
-            {...register("Enfermedades")}
+            {...register("enfermedades")}
             placeholder="Asma, rinitis, dolor de cabeza constante..."
+          />
+        </div>
+        <div className="space-y-1 w-1/3">
+          <label htmlFor="direccion">Dirección</label>
+          <textarea
+            id="direccion"
+            rows={5}
+            {...register("direccion")}
+            placeholder="Paraiso, Cartago..."
           />
         </div>
       </div>

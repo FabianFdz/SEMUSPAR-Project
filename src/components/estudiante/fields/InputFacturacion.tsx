@@ -1,9 +1,9 @@
-import { Estudiante } from "@prisma/client";
+import { Facturacion } from "@prisma/client";
 import { HTMLInputTypeAttribute } from "react";
 import { UseFormRegister } from "react-hook-form";
 
 interface InputProps {
-  name: keyof Estudiante;
+  name: keyof Facturacion;
   label: string;
   placeholder?: string;
   disabled?: boolean;
@@ -11,7 +11,7 @@ interface InputProps {
   register: UseFormRegister<any>;
 }
 
-export function Input({
+export function InputFacturacion({
   name,
   label,
   register,

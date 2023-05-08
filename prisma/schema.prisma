@@ -15,10 +15,12 @@ model Estudiante {
   telefono                String?
   email                   String?
   fecha_nacimiento        DateTime
+  grado_academico         String?
   institucion_academica   String?
   adecuacion              Boolean?
   tipo_adecuacion         String?
   trabaja                 Boolean?
+  lugar_trabajo           String?
   consideraciones_medicas String?
   enfermedades            String?
   direccion               String?
@@ -27,38 +29,36 @@ model Estudiante {
   fecha_retiro            DateTime?
   estado                  Boolean
   estado_comentario       String?
-  facturacion_id          Int?         @unique
+  docente                 String?
+  facturacion_id          Int?
+  facturacion             Facturacion? @relation(fields: [facturacion_id], references: [id])
+  encargados              Encargado[]
   created_at              DateTime     @default(now())
   updated_at              DateTime?    @updatedAt
-  docente                 String?
-  grado_academico         String?
-  encargados              Encargado[]
-  facturacion             Facturacion? @relation(fields: [facturacion_id], references: [id])
 }
 
 model Encargado {
   id              Int        @id @default(autoincrement())
+  nombre_completo String
   telefono        String
   email           String
   ocupacion       String
   lugar_trabajo   String
   parentezco      PARENTEZCO
   estudiante_id   Int
+  estudiante      Estudiante @relation(fields: [estudiante_id], references: [id])
   created_at      DateTime   @default(now())
   updated_at      DateTime   @updatedAt
-  nombre_completo String
-  estudiante      Estudiante @relation(fields: [estudiante_id], references: [id])
 }
 
 model Facturacion {
-  id              Int         @id @default(autoincrement())
+  id              Int          @id @default(autoincrement())
   cedula          String
-  telefono        String
   email           String
-  created_at      DateTime    @default(now())
-  updated_at      DateTime    @updatedAt
+  created_at      DateTime     @default(now())
+  updated_at      DateTime     @updatedAt
   nombre_completo String
-  Estudiante      Estudiante?
+  Estudiante      Estudiante[]
 }
 
 enum PARENTEZCO {
