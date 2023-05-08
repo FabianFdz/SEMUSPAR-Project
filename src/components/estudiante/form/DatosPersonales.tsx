@@ -53,7 +53,7 @@ export default function DatosPersonales({ register }: DatosPersonalesProps) {
           <textarea
             id="enfermedades"
             rows={5}
-            {...register("Enfermedaded")}
+            {...register("Enfermedades")}
             placeholder="Asma, rinitis, dolor de cabeza constante..."
           />
         </div>

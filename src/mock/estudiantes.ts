@@ -6,7 +6,7 @@ const estudiantes: Estudiante[] = [];
 for (let i = 0; i < 40; i++) {
   estudiantes.push({
     id: chance.guid(),
-    FechaMatricula: new Date().toDateString(), //chance.birthday().toLocaleString(),
+    FechaMatricula: new Date().toLocaleDateString(), //chance.birthday().toLocaleString(),
     Estado: chance.bool(),
     EstadoComentario: chance.bool() ? chance.sentence() : undefined,
     FechaRetiro: chance.bool() ? chance.date().toLocaleString() : undefined,
