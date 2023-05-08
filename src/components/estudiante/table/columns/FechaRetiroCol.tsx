@@ -1,0 +1,35 @@
+import React from "react";
+import dayjs from "dayjs";
+import "dayjs/locale/es-mx";
+import { Estudiante } from "@prisma/client";
+import relativeTime from "dayjs/plugin/relativeTime";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+
+dayjs.extend(relativeTime);
+dayjs.extend(localizedFormat);
+dayjs.locale("es-mx");
+
+const dateFormat = "DD/MMMM/YYYY";
+
+interface Props {
+  fechaRetiro: Estudiante["fecha_retiro"];
+}
+
+export default function FechaRetiroCol({ fechaRetiro }: Props) {
+  const fechaRetiroInst = dayjs(fechaRetiro);
+
+  return (
+    <>
+      {fechaRetiro && (
+        <>
+          <p className="capitalize">
+            {/* {dayjs(info.getValue()).format(dateFormat)} */}
+            {fechaRetiroInst.format(dateFormat)}
+          </p>
+          <p className="text-gray-400">{fechaRetiroInst.fromNow()}</p>
+        </>
+      )}
+      {!fechaRetiro && <p>No retirado</p>}
+    </>
+  );
+}
