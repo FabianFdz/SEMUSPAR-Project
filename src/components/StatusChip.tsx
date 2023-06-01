@@ -1,17 +1,26 @@
 interface StatusChipProps {
-  active: boolean;
+  active?: boolean;
+  disabled?: boolean;
 }
 
-export function StatusChip({ active }: StatusChipProps) {
+export function StatusChip({ active, disabled }: StatusChipProps) {
   return (
     <div
-      className={`flex flex-row items-center px-3 py-1 rounded-full text-sm w-fit justify-start space-x-2 font-semibold ${
-        active ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
+      className={`flex flex-row items-center px-4 py-3 rounded-full text-sm w-fit justify-start space-x-2 font-semibold ${
+        !disabled && active
+          ? "bg-green-100 text-green-800"
+          : !disabled && !active
+          ? "bg-red-100 text-red-800"
+          : "bg-gray-100 text-gray-800"
       }`}
     >
       <div
         className={`w-2 h-2 rounded-full ${
-          active ? "bg-green-800" : "bg-red-800"
+          !disabled && active
+            ? "bg-green-800"
+            : !disabled && !active
+            ? "bg-red-800"
+            : "bg-gray-800"
         }`}
       />
       <span>{active ? "Activo" : "Inactivo"}</span>

@@ -8,6 +8,9 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, "src")],
   },
+  images: {
+    domains: ["lh3.googleusercontent.com"],
+  },
 };
 
 module.exports = nextConfig;

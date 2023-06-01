@@ -15,6 +15,9 @@ const fetchEstudiantes = async () => {
       email: true,
       fecha_nacimiento: true,
     },
+    orderBy: {
+      id: "asc",
+    },
   });
 
   return estudiantes;

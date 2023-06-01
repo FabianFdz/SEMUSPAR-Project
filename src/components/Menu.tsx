@@ -1,6 +1,11 @@
 import Link from "next/link";
+import { LoginButton, LogoutButton } from "./AuthButtons";
+import { getServerSession } from "next-auth";
+import Image from "next/image";
 
-export default function Menu() {
+export default async function Menu() {
+  const session = await getServerSession();
+
   return (
     <nav className="flex flex-col items-center justify-center border-b mb-8">
       <Link href="/">
@@ -25,9 +30,23 @@ export default function Menu() {
         >
           Estudiantes
         </Link>
-        <button className="rounded-lg py-2 px-3 bg-blue-600 text-white">
-          Ingresar
-        </button>
+        {session && (
+          <>
+            <div className="flex items-center space-x-0">
+              <Image
+                src={session.user?.image ?? ""}
+                alt="Profile picture"
+                className="rounded-full"
+                width={35}
+                height={35}
+              />
+              <strong className="py-2 px-3">{session.user?.name} </strong>
+              <span className="text-gray-400">({session.user?.email})</span>
+            </div>
+            <LogoutButton />
+          </>
+        )}
+        {!session && <LoginButton />}
       </div>
     </nav>
   );

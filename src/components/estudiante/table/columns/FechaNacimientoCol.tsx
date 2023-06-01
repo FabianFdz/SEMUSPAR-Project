@@ -19,7 +19,7 @@ export default function FechaNacimientoCol({ fechaNacimiento }: Props) {
   return (
     <>
       <p className="capitalize">{dayjs(fechaNacimiento).format(dateFormat)}</p>
-      <p className="text-gray-400">{dayjs(fechaNacimiento).fromNow()}</p>
+      <p className="text-gray-400">{dayjs(fechaNacimiento).fromNow(true)}</p>
     </>
   );
 }

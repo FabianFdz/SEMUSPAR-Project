@@ -18,7 +18,7 @@ export default function DatosMatricula({ register, estado }: EducacionProps) {
       </div>
       <div className="flex space-x-4 justify-start">
         <div className="space-y-1 w-32 text-center">
-          <label htmlFor="adecuacion">Estado</label>
+          <label htmlFor="estado">Estado</label>
           <label className="flex items-center justify-center py-1">
             <input
               type="checkbox"
