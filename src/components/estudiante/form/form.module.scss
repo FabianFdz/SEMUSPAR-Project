@@ -1,8 +1,16 @@
-.encargadoForm, .datosPersonalesForm, .educacionForm, .facturacionForm {
+.encargadoForm,
+.datosPersonalesForm,
+.educacionForm,
+.facturacionForm {
   @apply flex flex-col space-y-4;
 
-  input, textarea {
+  input,
+  textarea {
     @apply py-2 px-3 rounded-md bg-gray-100 w-full disabled:bg-gray-300 duration-300 ease-in-out;
+  }
+
+  p {
+    @apply py-2 px-3 rounded-md w-full bg-gray-300 duration-300 ease-in-out;
   }
 
   select {

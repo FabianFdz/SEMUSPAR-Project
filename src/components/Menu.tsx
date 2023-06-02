@@ -7,32 +7,29 @@ export default async function Menu() {
   const session = await getServerSession();
 
   return (
-    <nav className="flex flex-col items-center justify-center border-b mb-8">
-      <Link href="/">
-        <h1 className="text-2xl font-bold text-center py-2">SEMUSPAR</h1>
+    <nav className="flex flex-row justify-start border-b mb-8 space-x-40 py-4">
+      <Link className="text-2xl font-bold text-center ml-4" href="/">
+        SEMUSPAR
       </Link>
-      <div className="flex flex-row justify-between space-x-14 pb-4 sm:space-x-7">
-        <Link
-          href="/"
-          className="rounded-lg hover:bg-blue-400 py-2 px-3 transition-all ease-in-out duration-300"
-        >
-          Inicio
-        </Link>
+      <div className="flex flex-row justify-between items-center space-x-7">
         <Link
           href="#"
-          className="rounded-lg hover:bg-blue-300 py-2 px-3 transition-all ease-in-out duration-300"
+          className="rounded hover:bg-gray-100 py-2 px-3 transition-all ease-in-out duration-200"
         >
           Control de Préstamo de Instrumentos
         </Link>
         <Link
           href="/estudiantes"
-          className="rounded-lg hover:bg-blue-300 py-2 px-3 transition-all ease-in-out duration-300"
+          className="rounded hover:bg-gray-100 py-2 px-3 transition-all ease-in-out duration-200"
         >
           Estudiantes
         </Link>
+      </div>
+      <div className="flex flex-row space-x-5 absolute top-4 right-4">
+        {!session && <LoginButton />}
         {session && (
           <>
-            <div className="flex items-center space-x-0">
+            <div className="flex items-center space-x-3">
               <Image
                 src={session.user?.image ?? ""}
                 alt="Profile picture"
@@ -40,13 +37,16 @@ export default async function Menu() {
                 width={35}
                 height={35}
               />
-              <strong className="py-2 px-3">{session.user?.name} </strong>
-              <span className="text-gray-400">({session.user?.email})</span>
+              <div className="flex flex-col text-left mr-4">
+                <strong>{session.user?.name} </strong>
+                <span className="text-gray-400 mt-[-0.25rem]">
+                  {session.user?.email}
+                </span>
+              </div>
+              <LogoutButton />
             </div>
-            <LogoutButton />
           </>
         )}
-        {!session && <LoginButton />}
       </div>
     </nav>
   );

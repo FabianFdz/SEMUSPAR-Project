@@ -1,16 +1,17 @@
 import EstudianteForm from "@/components/estudiante/form/EstudianteForm";
 import { prismaClient } from "@/services/prismaClient";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
-const fetchEstudiante = async (cedula: string) => {
+const fetchEstudiante = async (id: number) => {
   const estudiante = await prismaClient.estudiante.findFirst({
     where: {
-      cedula,
+      id,
     },
   });
 
   if (!estudiante) {
-    throw new Error();
+    notFound();
   }
 
   return estudiante;
@@ -21,7 +22,7 @@ interface Props {
 }
 
 export default async function Estudiante({ params: { slug } }: Props) {
-  const estudiante = await fetchEstudiante(slug);
+  const estudiante = await fetchEstudiante(parseInt(slug));
 
   return (
     <>

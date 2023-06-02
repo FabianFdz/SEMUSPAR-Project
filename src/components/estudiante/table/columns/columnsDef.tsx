@@ -15,7 +15,7 @@ export const estudiantesColumnsDef = [
     cell: (info) => (
       <Link
         className="text-blue-600"
-        href={`/estudiantes/${info.row.original.cedula}`}
+        href={`/estudiantes/${info.row.original.id}`}
       >
         #{info.getValue()}
       </Link>

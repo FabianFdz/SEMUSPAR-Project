@@ -14,7 +14,7 @@ model Estudiante {
   apellidos               String
   telefono                String?
   email                   String?
-  fecha_nacimiento        DateTime
+  fecha_nacimiento        String
   grado_academico         String?
   institucion_academica   String?
   adecuacion              Boolean?

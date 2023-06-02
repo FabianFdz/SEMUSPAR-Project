@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { Awaitable, User } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
 const handler = NextAuth({

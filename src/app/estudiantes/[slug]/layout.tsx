@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function EstudiantesLayout({
   children,
   params: { slug },
@@ -8,7 +6,7 @@ export default function EstudiantesLayout({
   params: { slug: string };
 }) {
   return (
-    <main className="flex flex-col w-2/3 mx-auto px-20">
+    <main className="flex flex-col lg:w-4/6 md:w-11/12 w-full mx-auto px-20">
       <div className="flex flex-row mb-3 space-x-3">
         <h2 className="text-xl font-bold">
           Estudiante <span className="text-blue-600">#{slug}</span>

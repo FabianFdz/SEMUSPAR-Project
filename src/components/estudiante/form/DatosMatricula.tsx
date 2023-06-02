@@ -1,14 +1,27 @@
+import dayjs from "dayjs";
+import "dayjs/locale/es-mx";
 import { Input } from "../fields";
 import styles from "./form.module.scss";
 import { Estudiante } from "@prisma/client";
 import { UseFormRegister } from "react-hook-form";
 
-interface EducacionProps {
-  register: UseFormRegister<Estudiante>;
+dayjs.locale("es-mx");
+
+const dateFormat = "DD/MMMM/YYYY";
+
+interface DatosMatriculaProps {
   estado: boolean;
+  register: UseFormRegister<Estudiante>;
+  fechaRetiro: Estudiante["fecha_retiro"];
+  fechaMatricula: Estudiante["fecha_matricula"];
 }
 
-export default function DatosMatricula({ register, estado }: EducacionProps) {
+export default function DatosMatricula({
+  estado,
+  register,
+  fechaRetiro,
+  fechaMatricula,
+}: DatosMatriculaProps) {
   return (
     <section id="educacion" className={`${styles.educacionForm}`}>
       <h3 className="text-md border-b w-full mb-3">Datos de Matrícula</h3>
@@ -47,18 +60,16 @@ export default function DatosMatricula({ register, estado }: EducacionProps) {
           disabled={estado}
           name="estado_comentario"
         />
-        <Input
-          disabled
-          register={register}
-          name="fecha_matricula"
-          label="Fecha de Matrícula"
-        />
-        <Input
-          disabled
-          name="fecha_retiro"
-          register={register}
-          label="Fecha de Retiro"
-        />
+        <div className="space-y-1 w-[10rem]">
+          <label>Fecha de Matrícula</label>
+          <p>{dayjs(fechaMatricula).format(dateFormat)}</p>
+        </div>
+        {fechaRetiro && (
+          <div className="space-y-1 w-[10rem]">
+            <label>Fecha de Retiro</label>
+            <p>{dayjs(fechaRetiro).format(dateFormat)}</p>
+          </div>
+        )}
       </div>
     </section>
   );

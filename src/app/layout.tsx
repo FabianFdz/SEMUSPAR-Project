@@ -23,7 +23,7 @@ export default function RootLayout({
       <body className={tajawal.className}>
         <div className="min-h-screen">
           <Menu />
-          <div className="min-h-[81.2vh] flex mb-8">{children}</div>
+          <div className="min-h-[84.5vh] flex mb-8">{children}</div>
           <Footer />
         </div>
       </body>
