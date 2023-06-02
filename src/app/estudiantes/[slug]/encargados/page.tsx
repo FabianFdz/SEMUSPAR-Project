@@ -3,10 +3,10 @@ import { prismaClient } from "@/services/prismaClient";
 import { PARENTEZCO } from "@prisma/client";
 import Link from "next/link";
 
-const fetchEstudiante = async (cedula: string) => {
+const fetchEstudiante = async (id: number) => {
   const estudiante = await prismaClient.estudiante.findFirst({
     where: {
-      cedula,
+      id,
     },
     select: {
       id: true,
@@ -26,7 +26,7 @@ interface Props {
 }
 
 export default async function EncargadosPage({ params: { slug } }: Props) {
-  const estudiante = await fetchEstudiante(slug);
+  const estudiante = await fetchEstudiante(parseInt(slug));
 
   return (
     <>
@@ -41,16 +41,32 @@ export default async function EncargadosPage({ params: { slug } }: Props) {
         <Link href={`/estudiantes/${slug}/facturacion`}>Facturación</Link>
       </nav>
       <div className="flex flex-col space-y-6">
-        {estudiante.encargados.length ? (
+        {estudiante.encargados.length > 1 ? (
           <>
             {estudiante.encargados.map((encargado, idx) => (
               <EstudianteEncargadoForm
-                key={`${idx}-${encargado.parentezco}`}
                 id={estudiante.id}
                 encargado={encargado}
                 parentezco={encargado.parentezco}
+                key={`${idx}-${encargado.parentezco}`}
               />
             ))}
+          </>
+        ) : estudiante.encargados.length ? (
+          <>
+            <EstudianteEncargadoForm
+              id={estudiante.id}
+              encargado={estudiante.encargados[0]}
+              parentezco={estudiante.encargados[0].parentezco}
+            />
+            <EstudianteEncargadoForm
+              id={estudiante.id}
+              parentezco={
+                estudiante.encargados[0].parentezco === PARENTEZCO.MADRE
+                  ? PARENTEZCO.PADRE
+                  : PARENTEZCO.MADRE
+              }
+            />
           </>
         ) : (
           <>

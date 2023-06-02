@@ -2,10 +2,10 @@ import EstudianteFacturacionForm from "@/components/estudiante/form/EstudianteFa
 import { prismaClient } from "@/services/prismaClient";
 import Link from "next/link";
 
-const fetchEstudiante = async (cedula: string) => {
+const fetchEstudiante = async (id: number) => {
   const estudiante = await prismaClient.estudiante.findFirst({
     where: {
-      cedula,
+      id,
     },
     select: {
       id: true,
@@ -25,7 +25,7 @@ interface Props {
 }
 
 export default async function EncargadosPage({ params: { slug } }: Props) {
-  const estudiante = await fetchEstudiante(slug);
+  const estudiante = await fetchEstudiante(parseInt(slug));
 
   return (
     <>

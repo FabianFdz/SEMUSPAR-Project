@@ -40,7 +40,7 @@ export default async function handler(
       errorMessage: "Teléfono inválido.",
     },
     {
-      valid: validator.isLength(nombre_completo, { min: 1, max: 20 }),
+      valid: validator.isLength(nombre_completo, { min: 1 }),
       errorMessage: "Nombre completo requerido.",
     },
   ];
