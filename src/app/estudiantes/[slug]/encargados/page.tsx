@@ -41,18 +41,24 @@ export default async function EncargadosPage({ params: { slug } }: Props) {
         <Link href={`/estudiantes/${slug}/facturacion`}>Facturación</Link>
       </nav>
       <div className="flex flex-col space-y-6">
-        {estudiante.encargados.length > 1 ? (
+        {estudiante.encargados.length > 1 ? ( // It's with both:
           <>
-            {estudiante.encargados.map((encargado, idx) => (
-              <EstudianteEncargadoForm
-                id={estudiante.id}
-                encargado={encargado}
-                parentezco={encargado.parentezco}
-                key={`${idx}-${encargado.parentezco}`}
-              />
-            ))}
+            {estudiante.encargados
+              .sort((madre, padre) =>
+                madre.parentezco
+                  .toLocaleLowerCase()
+                  .localeCompare(padre.parentezco.toLocaleLowerCase())
+              )
+              .map((encargado, idx) => (
+                <EstudianteEncargadoForm
+                  id={estudiante.id}
+                  encargado={encargado}
+                  parentezco={encargado.parentezco}
+                  key={`${idx}-${encargado.parentezco}`}
+                />
+              ))}
           </>
-        ) : estudiante.encargados.length ? (
+        ) : estudiante.encargados.length ? ( // It's with one only:
           <>
             <EstudianteEncargadoForm
               id={estudiante.id}
@@ -69,6 +75,7 @@ export default async function EncargadosPage({ params: { slug } }: Props) {
             />
           </>
         ) : (
+          // It's empty:
           <>
             <EstudianteEncargadoForm
               id={estudiante.id}

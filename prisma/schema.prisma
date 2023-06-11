@@ -53,11 +53,12 @@ model Encargado {
 
 model Facturacion {
   id              Int          @id @default(autoincrement())
+  nombre_completo String
   cedula          String
   email           String
+  pago            String       @default("Regular")
   created_at      DateTime     @default(now())
   updated_at      DateTime     @updatedAt
-  nombre_completo String
   Estudiante      Estudiante[]
 }
 

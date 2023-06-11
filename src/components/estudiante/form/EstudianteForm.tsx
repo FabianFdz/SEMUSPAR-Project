@@ -12,31 +12,42 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 interface Props {
-  estudiante: Estudiante;
+  estudiante?: Estudiante;
 }
 
 export default function EstudianteForm({ estudiante }: Props) {
   const router = useRouter();
-  const { data, error, loading, updateDatosPersonales } = useEstudiante();
+  const {
+    data,
+    error,
+    loading,
+    updateDatosPersonales,
+    agregarDatosPersonales,
+  } = useEstudiante();
   const { register, handleSubmit, watch, reset } = useForm<Estudiante>({
     defaultValues: { ...estudiante },
   });
 
   const onSubmit = async (dataForm: Estudiante) => {
-    const fechaRetiro =
-      !dataForm.estado && estudiante.estado
-        ? new Date()
-        : dataForm.estado && !estudiante.estado
-        ? null
-        : dataForm.fecha_retiro;
-    const dataCompleted: Estudiante = {
-      ...dataForm,
-      fecha_retiro: fechaRetiro,
-      estado_comentario: !dataForm.estado ? dataForm.estado_comentario : null,
-    };
+    if (estudiante) {
+      const fechaRetiro =
+        !dataForm.estado && estudiante.estado
+          ? new Date()
+          : dataForm.estado && !estudiante.estado
+          ? null
+          : dataForm.fecha_retiro;
+      const dataCompleted: Estudiante = {
+        ...dataForm,
+        fecha_retiro: fechaRetiro,
+        estado_comentario: !dataForm.estado ? dataForm.estado_comentario : null,
+      };
 
-    await updateDatosPersonales(dataCompleted);
-    router.refresh();
+      await updateDatosPersonales(dataCompleted);
+      router.refresh();
+    } else {
+      await agregarDatosPersonales(dataForm);
+      router.push(`/estudiantes`);
+    }
   };
 
   useEffect(() => {
@@ -59,8 +70,7 @@ export default function EstudianteForm({ estudiante }: Props) {
       <DatosMatricula
         register={register}
         estado={watch("estado")}
-        fechaMatricula={estudiante.fecha_matricula}
-        fechaRetiro={estudiante.fecha_retiro}
+        estudiante={estudiante}
       />
       <DatosPersonales register={register} />
       <Educacion
@@ -70,15 +80,18 @@ export default function EstudianteForm({ estudiante }: Props) {
       />
       <button
         type="submit"
-        className="py-2 px-3 bg-blue-600 text-white rounded w-[15rem] items-center"
+        disabled={loading}
+        className="py-2 px-3 bg-blue-600 disabled:bg-gray-400 text-white rounded w-[15rem] items-center"
       >
         {loading ? (
           <div className="my-auto flex flex-row justify-center items-center space-x-2">
             <CircularProgress color="inherit" size="1rem" />{" "}
-            <p>Actualizando...</p>
+            <p>{estudiante ? "Actualizando..." : "Guardando..."}</p>
           </div>
-        ) : (
+        ) : estudiante ? (
           "Guardar datos personales"
+        ) : (
+          "Agregar"
         )}
       </button>
     </form>

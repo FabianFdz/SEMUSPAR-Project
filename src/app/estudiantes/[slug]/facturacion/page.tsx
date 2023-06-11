@@ -24,7 +24,7 @@ interface Props {
   params: { slug: string };
 }
 
-export default async function EncargadosPage({ params: { slug } }: Props) {
+export default async function FacturacionPage({ params: { slug } }: Props) {
   const estudiante = await fetchEstudiante(parseInt(slug));
 
   return (

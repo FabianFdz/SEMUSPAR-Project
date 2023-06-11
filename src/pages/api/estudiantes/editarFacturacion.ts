@@ -6,9 +6,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { pago, email, cedula, estudiante_id, nombre_completo } = req.body;
+  const { pago, email, cedula, id, nombre_completo } = req.body;
 
-  if (!email || !estudiante_id || !nombre_completo || !cedula) {
+  if (!email || !id || !nombre_completo || !cedula) {
     return res.status(400).json({
       errorMessage: "Datos incompletos.",
     });
@@ -42,18 +42,16 @@ export default async function handler(
     });
   }
 
-  const facturacion = await prismaClient.facturacion.create({
+  const facturacion = await prismaClient.facturacion.update({
     data: {
       pago,
       email,
       cedula,
       nombre_completo,
     },
-  });
-
-  await prismaClient.estudiante.update({
-    data: { facturacion_id: facturacion.id },
-    where: { id: estudiante_id },
+    where: {
+      id,
+    },
   });
 
   res.json(facturacion);

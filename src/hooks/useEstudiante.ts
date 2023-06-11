@@ -46,5 +46,27 @@ export function useEstudiante() {
     }
   };
 
-  return { loading, error, data, updateDatosPersonales };
+  const agregarDatosPersonales = async (estudiante: UpdateProps) => {
+    setLoading(true);
+
+    try {
+      const response = await axios.patch(
+        "/api/estudiantes/agregarDatosPersonales",
+        { ...estudiante }
+      );
+      setLoading(false);
+      setData(response.data);
+    } catch (error: any) {
+      setLoading(false);
+      setError(error.response.errorMessage);
+    }
+  };
+
+  return {
+    loading,
+    error,
+    data,
+    updateDatosPersonales,
+    agregarDatosPersonales,
+  };
 }
