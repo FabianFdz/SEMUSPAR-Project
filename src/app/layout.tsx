@@ -22,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={tajawal.className}>
         <div className="min-h-screen">
+          {/* @ts-expect-error Server Component */}
           <Menu />
           <div className="min-h-[84.5vh] flex mb-8">{children}</div>
           <Footer />
