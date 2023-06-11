@@ -14,7 +14,7 @@ export interface EstudiantesInfoTable {
   fecha_retiro: Date | null;
   cedula: string;
   email: string | null;
-  fecha_nacimiento: Date;
+  fecha_nacimiento: string;
 }
 
 interface Props {
