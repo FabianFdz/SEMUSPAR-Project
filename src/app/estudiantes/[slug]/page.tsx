@@ -1,7 +1,8 @@
+import DeleteEstudianteBtn from "@/components/estudiante/DeleteEstudianteBtn";
 import EstudianteForm from "@/components/estudiante/form/EstudianteForm";
 import { prismaClient } from "@/services/prismaClient";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, useRouter, redirect } from "next/navigation";
 
 const fetchEstudiante = async (id: number) => {
   const estudiante = await prismaClient.estudiante.findFirst({
@@ -35,6 +36,7 @@ export default async function Estudiante({ params: { slug } }: Props) {
         </Link>
         <Link href={`/estudiantes/${slug}/encargados`}>Encargados</Link>
         <Link href={`/estudiantes/${slug}/facturacion`}>Facturación</Link>
+        <DeleteEstudianteBtn estudianteId={parseInt(slug)} />
       </nav>
       <EstudianteForm estudiante={estudiante} />
     </>

@@ -31,7 +31,7 @@ model Estudiante {
   estado_comentario       String?
   docente                 String?
   facturacion_id          Int?
-  facturacion             Facturacion? @relation(fields: [facturacion_id], references: [id])
+  facturacion             Facturacion? @relation(fields: [facturacion_id], references: [id], onDelete: Cascade)
   encargados              Encargado[]
   created_at              DateTime     @default(now())
   updated_at              DateTime?    @updatedAt

@@ -75,11 +75,24 @@ export function useEstudiante() {
     }
   };
 
+  const deleteEstudiante = async (id: number) => {
+    setLoading(true);
+
+    try {
+      await axios.patch("/api/estudiantes/deleteEstudiante", { id });
+      setLoading(false);
+    } catch (error: any) {
+      setLoading(false);
+      setError(error.response.errorMessage);
+    }
+  };
+
   return {
-    loading,
-    error,
     data,
+    error,
+    loading,
     bulkUpdate,
+    deleteEstudiante,
     updateDatosPersonales,
     agregarDatosPersonales,
   };
