@@ -1,3 +1,4 @@
+import { EstudianteFullData } from "@/global.types";
 import { Estudiante } from "@prisma/client";
 import axios from "axios";
 import { useState } from "react";
@@ -62,10 +63,23 @@ export function useEstudiante() {
     }
   };
 
+  const bulkUpdate = async (estudiantesFullData: Array<EstudianteFullData>) => {
+    setLoading(true);
+
+    try {
+      await axios.patch("/api/estudiantes/bulkUpdate", estudiantesFullData);
+      setLoading(false);
+    } catch (error: any) {
+      setLoading(false);
+      setError(error.response.errorMessage);
+    }
+  };
+
   return {
     loading,
     error,
     data,
+    bulkUpdate,
     updateDatosPersonales,
     agregarDatosPersonales,
   };

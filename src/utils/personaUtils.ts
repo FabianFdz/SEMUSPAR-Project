@@ -23,3 +23,29 @@ export function calculateAge(dateOfBirth: Date): number {
 
   return age;
 }
+
+/**
+ * Extrae los apellidos de un nombre completo.
+ * Se asume la convención de nombres de América Latina, donde los últimos 2 nombres son los apellidos.
+ *
+ * @param {string} fullName - El nombre completo que contiene los nombres y apellidos.
+ * @returns {string} Un string que contiene los apellidos unidos por espacios en blanco.
+ */
+export function extractLastNames(fullName: string): string {
+  const names = fullName.trim().split(" ");
+  const lastNames = names.slice(-2); // Extract the last two elements
+  return lastNames.join(" ");
+}
+
+/**
+ * Extrae los nombres de pila de un nombre completo.
+ * Se asume la convención de nombres de América Latina, donde los últimos 2 nombres son los apellidos.
+ *
+ * @param {string} fullName - El nombre completo que contiene los nombres y apellidos.
+ * @returns {string} Un string que contiene los nombres de pila unidos por espacios en blanco.
+ */
+export function extractFirstNames(fullName: string): string {
+  const names = fullName.trim().split(" ");
+  const firstNames = names.slice(0, -2); // Extract all elements except the last two
+  return firstNames.join(" ");
+}

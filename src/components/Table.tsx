@@ -6,8 +6,6 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import Pagination from "./Pagination";
-import Link from "next/link";
-import PencilSquare from "./icons/PencilSquare";
 
 interface TableProps {
   data: Array<any>;

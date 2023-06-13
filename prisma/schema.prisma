@@ -9,7 +9,7 @@ datasource db {
 
 model Estudiante {
   id                      Int          @id @default(autoincrement())
-  cedula                  String
+  cedula                  String       @unique
   nombre                  String
   apellidos               String
   telefono                String?
