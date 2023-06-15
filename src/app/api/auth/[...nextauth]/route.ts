@@ -6,7 +6,7 @@ const handler = NextAuth({
     async signIn({ user, account, profile, email, credentials }) {
       if (profile)
         return (
-          profile.email?.endsWith("@semuspar.com") ||
+          profile.email?.endsWith("@emuspar.com") ||
           profile.email === "fdzfabian@gmail.com"
         );
       return false;
