@@ -4,6 +4,7 @@ import "dayjs/locale/es-mx";
 import { Estudiante } from "@prisma/client";
 import relativeTime from "dayjs/plugin/relativeTime";
 import localizedFormat from "dayjs/plugin/localizedFormat";
+import { calculateAge } from "@/utils/personaUtils";
 
 dayjs.extend(relativeTime);
 dayjs.extend(localizedFormat);
@@ -19,7 +20,9 @@ export default function FechaNacimientoCol({ fechaNacimiento }: Props) {
   return (
     <>
       <p className="capitalize">{dayjs(fechaNacimiento).format(dateFormat)}</p>
-      <p className="text-gray-400">{dayjs(fechaNacimiento).fromNow(true)}</p>
+      <p className="text-gray-400">
+        {calculateAge(new Date(fechaNacimiento))} años
+      </p>
     </>
   );
 }

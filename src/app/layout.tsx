@@ -2,6 +2,7 @@ import "./globals.css";
 import { Red_Hat_Display } from "next/font/google";
 import Footer from "@/components/Footer";
 import Menu from "@/components/Menu";
+import { NextAuthProvider } from "./providers";
 
 const tajawal = Red_Hat_Display({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
@@ -24,7 +25,9 @@ export default function RootLayout({
         <div className="min-h-screen">
           {/* @ts-expect-error Server Component */}
           <Menu />
-          <div className="min-h-[84.5vh] flex mb-8">{children}</div>
+          <NextAuthProvider>
+            <div className="min-h-[84.5vh] flex mb-8">{children}</div>
+          </NextAuthProvider>
           <Footer />
         </div>
       </body>

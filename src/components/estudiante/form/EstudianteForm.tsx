@@ -10,12 +10,14 @@ import { useEstudiante } from "@/hooks/useEstudiante";
 import { CircularProgress } from "@mui/material";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 interface Props {
   estudiante?: Estudiante;
 }
 
 export default function EstudianteForm({ estudiante }: Props) {
+  const { status } = useSession();
   const router = useRouter();
   const {
     data,
@@ -80,7 +82,7 @@ export default function EstudianteForm({ estudiante }: Props) {
       />
       <button
         type="submit"
-        disabled={loading}
+        disabled={loading || status !== "authenticated"}
         className="py-2 px-3 bg-blue-600 disabled:bg-gray-400 text-white rounded w-[15rem] items-center"
       >
         {loading ? (

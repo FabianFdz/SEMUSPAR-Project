@@ -3,7 +3,11 @@
 import { ChangeEvent, useState } from "react";
 import { parse } from "papaparse";
 import { Encargado, Estudiante, Facturacion } from "@prisma/client";
-import { extractFirstNames, extractLastNames } from "@/utils/personaUtils";
+import {
+  convertDateStandard,
+  extractFirstNames,
+  extractLastNames,
+} from "@/utils/personaUtils";
 import { EstudianteFullData, FileRow } from "@/global.types";
 import { useEstudiante } from "@/hooks/useEstudiante";
 import { CircularProgress } from "@mui/material";
@@ -57,7 +61,9 @@ export default function ImportPage() {
               ? ""
               : row["Estado"].trim(),
           fecha_matricula: new Date(row[`Fecha \nMatrícula`].trim()),
-          fecha_nacimiento: row["Fecha de Nacimiento"].trim(),
+          fecha_nacimiento: convertDateStandard(
+            row["Fecha de Nacimiento"].trim()
+          ),
           fecha_retiro:
             row["Fecha Retiro"].trim() !== ""
               ? new Date(row["Fecha Retiro"].trim())

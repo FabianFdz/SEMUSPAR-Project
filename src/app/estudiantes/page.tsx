@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { prismaClient } from "@/services/prismaClient";
 import EstudiantesList from "@/components/estudiante/table/EstudiantesList";
+import { GetServerSideProps } from "next";
 
 const fetchEstudiantes = async () => {
   const estudiantes = await prismaClient.estudiante.findMany({
@@ -49,3 +50,5 @@ export default async function Estudiantes() {
     </main>
   );
 }
+
+export const revalidate = 0;

@@ -49,3 +49,16 @@ export function extractFirstNames(fullName: string): string {
   const firstNames = names.slice(0, -2); // Extract all elements except the last two
   return firstNames.join(" ");
 }
+
+/**
+ * Convierte una cadena de fecha del formato "mm/dd/yyyy" a "yyyy-mm-dd".
+ * @param {string} dateString - La cadena de fecha a convertir en formato "mm/dd/yyyy".
+ * @returns {string} La cadena de fecha convertida en formato "yyyy-mm-dd".
+ */
+export function convertDateStandard(dateString: string) {
+  const partes = dateString.split("/");
+  const dia = partes[1].padStart(2, "0");
+  const mes = partes[0].padStart(2, "0");
+  const anio = partes[2];
+  return `${anio}-${mes}-${dia}`;
+}

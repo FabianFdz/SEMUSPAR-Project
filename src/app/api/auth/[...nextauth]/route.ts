@@ -1,9 +1,9 @@
-import NextAuth, { Awaitable, User } from "next-auth";
+import NextAuth, { AuthOptions, Awaitable, User } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-const handler = NextAuth({
+export const authOptions: AuthOptions = {
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn({ profile }) {
       if (profile)
         return (
           profile.email?.endsWith("@emuspar.com") ||
@@ -18,6 +18,8 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
   ],
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

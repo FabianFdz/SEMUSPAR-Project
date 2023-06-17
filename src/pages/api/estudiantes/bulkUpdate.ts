@@ -1,5 +1,3 @@
-import validator from "validator";
-import { Estudiante } from "@prisma/client";
 import { prismaClient } from "@/services/prismaClient";
 import { NextApiRequest, NextApiResponse } from "next";
 import { EstudianteFullData } from "@/global.types";
