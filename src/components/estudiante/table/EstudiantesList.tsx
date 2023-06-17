@@ -2,8 +2,9 @@
 
 import Table from "@/components/Table";
 import { estudiantesColumnsDef } from "./columns/columnsDef";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { StatusChip } from "@/components/StatusChip";
+import { useRouter } from "next/navigation";
 
 export interface EstudiantesInfoTable {
   id: number;
@@ -24,6 +25,7 @@ interface Props {
 export default function EstudiantesList({ estudiantes }: Props) {
   const [estado, setEstado] = useState<boolean | null>(null);
   const [filtro, setFiltro] = useState<string>("");
+  const router = useRouter();
 
   const handleLimpiarFiltros = () => {
     setEstado(null);
@@ -45,6 +47,11 @@ export default function EstudiantesList({ estudiantes }: Props) {
             .includes(filtro.trim().toLowerCase()))
     );
   };
+
+  useEffect(() => {
+    router.refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="flex flex-col">

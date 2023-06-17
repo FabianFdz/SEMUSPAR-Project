@@ -34,7 +34,7 @@ export default async function Estudiantes() {
         <div className="flex flex-row space-x-2">
           <Link
             href="/estudiantes/importar"
-            className="px-3 py-2 bg-slate-500 rounded-md text-white"
+            className="px-3 py-2 bg-blue-900 rounded-md text-white"
           >
             Importar
           </Link>
@@ -51,4 +51,4 @@ export default async function Estudiantes() {
   );
 }
 
-export const revalidate = 0;
+export const revalidate = 1;
