@@ -23,17 +23,24 @@ export function FacturacionForm({
     <section id="facturacion" className={`${styles.facturacionForm}`}>
       <h3 className="text-md border-b w-full mb-3">Facturación</h3>
       <div className="flex space-x-4 justify-start">
-        <InputFacturacion label="Cédula" register={register} name="cedula" />
+        <InputFacturacion
+          label="Cédula"
+          register={register}
+          name="cedula"
+          required
+        />
         <InputFacturacion
           label="Nombre"
           register={register}
           name="nombre_completo"
+          required
         />
         <InputFacturacion
           label="Correo Electrónico"
           register={register}
           type="email"
           name="email"
+          required
         />
       </div>
       <div className="flex space-x-4 justify-start">

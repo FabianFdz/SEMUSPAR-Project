@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { Facturacion } from "@prisma/client";
 
 import { FacturacionForm } from "./FacturacionForm";
-import { CircularProgress } from "@mui/material";
+import { Alert, CircularProgress } from "@mui/material";
 import { useFacturacion } from "@/hooks/useFacturacion";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -18,7 +18,7 @@ interface Props {
 
 export default function EstudianteFacturacionForm({ estudiante }: Props) {
   const router = useRouter();
-  const { loading, updateFacturacion, createFacturacion, data } =
+  const { loading, error, updateFacturacion, createFacturacion, data } =
     useFacturacion();
   const { register, setValue, getValues, reset, handleSubmit } =
     useForm<Facturacion>({
@@ -35,7 +35,9 @@ export default function EstudianteFacturacionForm({ estudiante }: Props) {
     } else {
       await createFacturacion({ ...dataForm, estudiante_id: estudiante.id });
     }
-    router.refresh();
+    if (!error) {
+      router.refresh();
+    }
   };
 
   useEffect(() => {
@@ -60,6 +62,7 @@ export default function EstudianteFacturacionForm({ estudiante }: Props) {
         setValue={setValue}
         getValues={getValues}
       />
+      {error && <Alert severity="error">{error}</Alert>}
       <button
         type="submit"
         disabled={loading}
@@ -74,6 +77,9 @@ export default function EstudianteFacturacionForm({ estudiante }: Props) {
           "Guardar facturación"
         )}
       </button>
+      <p className="font-medium">
+        <span className="text-red-600">*</span> Campos requeridos.
+      </p>
     </form>
   );
 }

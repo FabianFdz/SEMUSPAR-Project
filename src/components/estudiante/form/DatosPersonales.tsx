@@ -1,4 +1,4 @@
-import { Input } from "../fields";
+import { InputEstudiante } from "../fields";
 import styles from "./form.module.scss";
 import { Estudiante } from "@prisma/client";
 import { UseFormRegister } from "react-hook-form";
@@ -12,24 +12,40 @@ export default function DatosPersonales({ register }: DatosPersonalesProps) {
     <section id="datos-personales" className={`${styles.datosPersonalesForm}`}>
       <h3 className="text-md border-b w-full mb-3">Datos Personales</h3>
       <div className="flex space-x-4 justify-start">
-        <Input label="Cédula" register={register} name="cedula" />
-        <Input label="Nombre" register={register} name="nombre" />
-        <Input label="Apellidos" register={register} name="apellidos" />
+        <InputEstudiante
+          label="Cédula"
+          register={register}
+          name="cedula"
+          required
+        />
+        <InputEstudiante
+          label="Nombre"
+          register={register}
+          name="nombre"
+          required
+        />
+        <InputEstudiante
+          label="Apellidos"
+          register={register}
+          name="apellidos"
+          required
+        />
       </div>
       <div className="flex space-x-4 justify-start">
-        <Input
+        <InputEstudiante
           label="Fecha de Nacimiento"
           register={register}
           type="date"
           name="fecha_nacimiento"
+          required
         />
-        <Input
+        <InputEstudiante
           label="Teléfono"
           register={register}
           type="tel"
           name="telefono"
         />
-        <Input
+        <InputEstudiante
           label="Correo Electrónico"
           register={register}
           type="email"

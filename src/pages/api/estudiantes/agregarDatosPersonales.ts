@@ -40,23 +40,23 @@ export default async function handler(
   const errors: string[] = [];
   const validationSchema = [
     {
-      valid: validator.isLength(cedula, { min: 1 }),
-      errorMessage: "Cédula requerida.",
+      valid: validator.isLength(cedula, { min: 9, max: 15 }),
+      errorMessage: "Cédula completa requerida.",
     },
     {
-      valid: validator.isLength(nombre, { min: 1 }),
+      valid: validator.isLength(nombre, { min: 2 }),
       errorMessage: "Nombre requerido.",
     },
     {
-      valid: validator.isLength(apellidos, { min: 1 }),
+      valid: validator.isLength(apellidos, { min: 2 }),
       errorMessage: "Apellidos requeridos.",
     },
     {
-      valid: validator.isLength(fecha_nacimiento, { min: 1 }),
+      valid: validator.isDate(fecha_nacimiento),
       errorMessage: "Fecha de nacimiento requerida.",
     },
     {
-      valid: validator.isLength(instrumento, { min: 1 }),
+      valid: validator.isLength(instrumento, { min: 2 }),
       errorMessage: "Instrumento requerido.",
     },
   ];

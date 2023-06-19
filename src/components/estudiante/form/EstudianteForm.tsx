@@ -1,16 +1,17 @@
 "use client";
 
+import * as z from "zod";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { Estudiante } from "@prisma/client";
+import { useSession } from "next-auth/react";
+import { Alert, CircularProgress } from "@mui/material";
 
 import Educacion from "./EducacionForm";
 import DatosMatricula from "./DatosMatricula";
 import DatosPersonales from "./DatosPersonales";
 import { useEstudiante } from "@/hooks/useEstudiante";
-import { CircularProgress } from "@mui/material";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 
 interface Props {
   estudiante?: Estudiante;
@@ -45,10 +46,10 @@ export default function EstudianteForm({ estudiante }: Props) {
       };
 
       await updateDatosPersonales(dataCompleted);
-      router.refresh();
     } else {
-      await agregarDatosPersonales(dataForm);
-      router.push(`/estudiantes`);
+      if (await agregarDatosPersonales(dataForm)) {
+        router.push("/estudiantes");
+      }
     }
   };
 
@@ -80,6 +81,7 @@ export default function EstudianteForm({ estudiante }: Props) {
         adecuacion={watch("adecuacion")}
         trabaja={watch("trabaja")}
       />
+      {error && <Alert severity="error">{error}</Alert>}
       <button
         type="submit"
         disabled={loading || status !== "authenticated"}
@@ -96,6 +98,9 @@ export default function EstudianteForm({ estudiante }: Props) {
           "Agregar"
         )}
       </button>
+      <p className="font-medium">
+        <span className="text-red-600">*</span> Campos requeridos.
+      </p>
     </form>
   );
 }

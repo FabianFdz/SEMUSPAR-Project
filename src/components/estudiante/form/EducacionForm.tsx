@@ -1,6 +1,6 @@
 import { UseFormRegister } from "react-hook-form";
 import styles from "./form.module.scss";
-import { Input } from "../fields";
+import { InputEstudiante } from "../fields";
 import { Estudiante } from "@prisma/client";
 
 interface EducacionProps {
@@ -18,13 +18,13 @@ export default function EducacionForm({
     <section id="educacion" className={`${styles.educacionForm}`}>
       <h3 className="text-md border-b w-full mb-3">Educación</h3>
       <div className="flex space-x-4 justify-start">
-        <Input
+        <InputEstudiante
           label="Grado Académico"
           register={register}
           placeholder="Bachillerato, escuela, colegio..."
           name="grado_academico"
         />
-        <Input
+        <InputEstudiante
           label="Institución Académica"
           register={register}
           placeholder="Técnológico de Costa Rica..."
@@ -56,7 +56,7 @@ export default function EducacionForm({
             </div>
           </label>
         </div>
-        <Input
+        <InputEstudiante
           label="Lugar de Trabajo"
           register={register}
           disabled={!trabaja}
@@ -88,7 +88,7 @@ export default function EducacionForm({
             </div>
           </label>
         </div>
-        <Input
+        <InputEstudiante
           label="Tipo de Adecuación"
           register={register}
           disabled={!adecuacion}

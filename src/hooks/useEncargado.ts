@@ -26,10 +26,12 @@ export function useEncargado() {
         ...encargado,
       });
       setLoading(false);
+      setError(null);
       setData(response.data);
     } catch (error: any) {
       setLoading(false);
-      setError(error.response.errorMessage);
+      setData(null);
+      setError(error.response.data.errorMessage);
     }
   };
 
@@ -41,10 +43,12 @@ export function useEncargado() {
         ...encargado,
       });
       setLoading(false);
+      setError(null);
       setData(response.data);
     } catch (error: any) {
       setLoading(false);
-      setError(error.response.errorMessage);
+      setData(null);
+      setError(error.response.data.errorMessage);
     }
   };
 

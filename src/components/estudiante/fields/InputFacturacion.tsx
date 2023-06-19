@@ -1,34 +1,25 @@
 import { Facturacion } from "@prisma/client";
 import { HTMLInputTypeAttribute } from "react";
 import { UseFormRegister } from "react-hook-form";
+import { Input } from "./Input";
 
 interface InputProps {
   name: keyof Facturacion;
   label: string;
   placeholder?: string;
   disabled?: boolean;
+  required?: boolean;
   type?: HTMLInputTypeAttribute;
   register: UseFormRegister<any>;
 }
 
 export function InputFacturacion({
-  name,
-  label,
-  register,
-  placeholder,
   type = "text",
+  required = false,
   disabled = false,
+  ...props
 }: InputProps) {
   return (
-    <div className="space-y-1">
-      <label htmlFor={name}>{label}</label>
-      <input
-        id={name}
-        type={type}
-        placeholder={placeholder ?? label}
-        disabled={disabled}
-        {...register(name)}
-      />
-    </div>
+    <Input type={type} required={required} disabled={disabled} {...props} />
   );
 }

@@ -40,10 +40,12 @@ export function useEstudiante() {
         { ...estudiante }
       );
       setLoading(false);
+      setError(null);
       setData(response.data);
     } catch (error: any) {
       setLoading(false);
-      setError(error.response.errorMessage);
+      setData(null);
+      setError(error.response.data.errorMessage);
     }
   };
 
@@ -56,10 +58,14 @@ export function useEstudiante() {
         { ...estudiante }
       );
       setLoading(false);
+      setError(null);
       setData(response.data);
+      return true;
     } catch (error: any) {
       setLoading(false);
-      setError(error.response.errorMessage);
+      setData(null);
+      setError(error.response.data.errorMessage);
+      return false;
     }
   };
 
@@ -71,7 +77,7 @@ export function useEstudiante() {
       setLoading(false);
     } catch (error: any) {
       setLoading(false);
-      setError(error.response.errorMessage);
+      setError(error.response.data.errorMessage);
     }
   };
 
@@ -83,7 +89,7 @@ export function useEstudiante() {
       setLoading(false);
     } catch (error: any) {
       setLoading(false);
-      setError(error.response.errorMessage);
+      setError(error.response.data.errorMessage);
     }
   };
 

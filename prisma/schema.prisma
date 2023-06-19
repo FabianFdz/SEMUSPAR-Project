@@ -42,8 +42,8 @@ model Encargado {
   nombre_completo String
   telefono        String
   email           String
-  ocupacion       String
-  lugar_trabajo   String
+  ocupacion       String?
+  lugar_trabajo   String?
   parentezco      PARENTEZCO
   estudiante_id   Int
   estudiante      Estudiante @relation(fields: [estudiante_id], references: [id])

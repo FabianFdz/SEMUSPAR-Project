@@ -38,7 +38,9 @@ export default function EstudianteEncargadoForm({
     } else {
       await createEncargado({ ...dataForm, parentezco, estudiante_id: id });
     }
-    router.refresh();
+    if (!error) {
+      router.refresh();
+    }
   };
 
   useEffect(() => {
@@ -76,6 +78,9 @@ export default function EstudianteEncargadoForm({
           </>
         )}
       </button>
+      <p className="font-medium">
+        <span className="text-red-600">*</span> Campos requeridos.
+      </p>
     </form>
   );
 }

@@ -24,10 +24,12 @@ export function useFacturacion() {
         ...facturacion,
       });
       setLoading(false);
+      setError(null);
       setData(response.data);
     } catch (error: any) {
       setLoading(false);
-      setError(error.response.errorMessage);
+      setData(null);
+      setError(error.response.data.errorMessage);
     }
   };
 
@@ -38,11 +40,13 @@ export function useFacturacion() {
       const response = await axios.post("/api/estudiantes/agregarFacturacion", {
         ...facturacion,
       });
+      setError(null);
       setLoading(false);
       setData(response.data);
     } catch (error: any) {
       setLoading(false);
-      setError(error.response.errorMessage);
+      setData(null);
+      setError(error.response.data.errorMessage);
     }
   };
 

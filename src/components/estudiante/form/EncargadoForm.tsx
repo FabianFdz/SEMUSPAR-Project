@@ -29,18 +29,21 @@ export default function EncargadoForm({
           label="Nombre Completo"
           register={register}
           name="nombre_completo"
+          required
         />
         <InputEncargado
           label="Teléfono"
           register={register}
           type="tel"
           name="telefono"
+          required
         />
         <InputEncargado
           label="Correo Electrónico"
           register={register}
           type="email"
           name="email"
+          required
         />
       </div>
       <div className="flex space-x-4 justify-start">

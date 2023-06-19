@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import "dayjs/locale/es-mx";
-import { Input } from "../fields";
+import { InputEstudiante } from "../fields";
 import styles from "./form.module.scss";
 import { Estudiante } from "@prisma/client";
 import { UseFormRegister } from "react-hook-form";
@@ -25,9 +25,14 @@ export default function DatosMatricula({
       <h3 className="text-md border-b w-full mb-3">Datos de Matrícula</h3>
       <div className="flex space-x-4 justify-start">
         {estudiante && (
-          <Input name="docente" register={register} label="Docente" />
+          <InputEstudiante name="docente" register={register} label="Docente" />
         )}
-        <Input name="instrumento" register={register} label="Instrumento" />
+        <InputEstudiante
+          name="instrumento"
+          register={register}
+          required
+          label="Instrumento"
+        />
       </div>
       {estudiante && (
         <div className="flex space-x-4 justify-start">
@@ -55,7 +60,7 @@ export default function DatosMatricula({
               </div>
             </label>
           </div>
-          <Input
+          <InputEstudiante
             label="Comentario sobre retiro"
             register={register}
             disabled={estado}
