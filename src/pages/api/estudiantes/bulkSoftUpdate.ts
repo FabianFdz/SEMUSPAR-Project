@@ -7,18 +7,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const arrFullData = req.body as Array<EstudianteFullData>;
-  let { isSoft } = req.query;
-  let isSoftUpdate = isSoft === "true";
-
-  if (!isSoftUpdate) {
-    await prismaClient.estudiante.updateMany({
-      data: {
-        fecha_retiro: new Date(),
-        estado_comentario: "Retiro",
-        estado: false,
-      },
-    });
-  }
+  const isSoft = req.query as { isSoft: boolean };
 
   try {
     for (const data of arrFullData) {

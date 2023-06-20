@@ -69,11 +69,17 @@ export function useEstudiante() {
     }
   };
 
-  const bulkUpdate = async (estudiantesFullData: Array<EstudianteFullData>) => {
+  const bulkUpdate = async (
+    estudiantesFullData: Array<EstudianteFullData>,
+    isSoftUpdate: boolean
+  ) => {
     setLoading(true);
 
     try {
-      await axios.patch("/api/estudiantes/bulkUpdate", estudiantesFullData);
+      await axios.patch(
+        `/api/estudiantes/bulkUpdate?isSoft=${isSoftUpdate}`,
+        estudiantesFullData
+      );
       setLoading(false);
     } catch (error: any) {
       setLoading(false);
