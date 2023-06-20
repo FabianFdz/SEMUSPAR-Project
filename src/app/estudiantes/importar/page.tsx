@@ -7,7 +7,7 @@ import { useEstudiante } from "@/hooks/useEstudiante";
 import { Alert, CircularProgress } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { parseEstudiantesData } from "@/utils/estudianteUtils";
-import FechaNacimientoCol from "@/components/estudiante/table/columns/FechaNacimientoCol";
+import FechaMatriculaCol from "@/components/estudiante/table/columns/FechaMatriculaCol";
 
 export default function ImportPage() {
   const router = useRouter();
@@ -82,25 +82,19 @@ export default function ImportPage() {
       <h1 className="text-xl font-bold">Importar Estudiantes</h1>
       {fileLoadError && <Alert severity="error">{fileLoadError}</Alert>}
       {!loading && (
-        <div className="flex flex-col items-center justify-center">
-          <label className="w-full flex flex-col items-center px-4 py-6 bg-slate-200 text-blue-600 rounded-lg tracking-wide uppercase border border-blue-600 cursor-pointer hover:bg-blue-600 hover:text-white">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
-              />
-            </svg>
-
+        <div className="flex flex-col items-center justify-center bg-gray-100 p-6 w-3/12 mx-auto rounded-full">
+          <label className="w-full flex flex-col items-center px-4 py-6 bg-blue-200 text-blue-600 rounded-full tracking-wide uppercase border border-blue-600 cursor-pointer hover:bg-blue-600 hover:text-white transition-all duration-500 text-center">
             <span className="mt-2 text-base leading-normal">
-              {selectedFile ? selectedFile.name : "Seleccione un archivo"}
+              {selectedFile ? (
+                <>
+                  Archivo seleccionado:{" "}
+                  <span className="font-bold animate-pulse">
+                    {selectedFile.name}
+                  </span>
+                </>
+              ) : (
+                "Seleccione un archivo .CSV"
+              )}
             </span>
             <input type="file" className="hidden" onChange={handleFileChange} />
           </label>
@@ -115,7 +109,7 @@ export default function ImportPage() {
       {!loading && dataSample && (
         <p>
           <strong>Estudiantes a importar en la base de datos:</strong>{" "}
-          {dataSample.length - 1}
+          {dataSample.length}
         </p>
       )}
       {!loading && dataSample && dataSample.length > 0 && (
@@ -138,7 +132,7 @@ export default function ImportPage() {
                       </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                      {dataSample.map((estudiante, idx) => (
+                      {dataSample.map((estudiante) => (
                         <tr key={estudiante.cedula}>
                           {Object.keys(dataSample[0]).map((key) => {
                             const value =
@@ -149,11 +143,9 @@ export default function ImportPage() {
                                 className="px-6 py-4 whitespace-nowrap"
                               >
                                 {value && typeof value === "object" ? (
-                                  <FechaNacimientoCol
+                                  <FechaMatriculaCol
                                     key={key}
-                                    fechaNacimiento={(
-                                      value as Date
-                                    ).toISOString()}
+                                    fechaMatricula={value as Date}
                                   />
                                 ) : (
                                   <p>{value}</p>
