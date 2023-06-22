@@ -8,14 +8,14 @@ import { useRouter } from "next/navigation";
 
 export interface EstudiantesInfoTable {
   id: number;
+  estado: boolean;
+  fecha_nacimiento: string;
+  cedula: string;
   nombre: string;
   apellidos: string;
-  estado: boolean;
-  fecha_matricula: Date;
-  fecha_retiro: Date | null;
-  cedula: string;
   email: string | null;
-  fecha_nacimiento: string;
+  instrumento: string;
+  docente: string | null;
 }
 
 interface Props {
