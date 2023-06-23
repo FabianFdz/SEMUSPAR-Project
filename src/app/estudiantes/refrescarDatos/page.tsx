@@ -95,8 +95,8 @@ export default function RefreshEstudentsDataPage() {
                       <thead className="bg-gray-100">
                         <tr className="py-3">
                           {Object.keys(dataSample[0].estudiante)
-                            .slice(11, 18)
-                            .map((header, idx) => (
+                            .slice(12, 17)
+                            .map((header) => (
                               <th
                                 key={header}
                                 className="group px-6 py-3 text-left text-reg font-medium text-gray-500 uppercase tracking-wider"
@@ -110,7 +110,7 @@ export default function RefreshEstudentsDataPage() {
                         {dataSample.map((data) => (
                           <tr key={data.estudiante.cedula}>
                             {Object.keys(dataSample[0].estudiante)
-                              .slice(11, 18)
+                              .slice(12, 17)
                               .map((key) => {
                                 const value =
                                   data.estudiante[

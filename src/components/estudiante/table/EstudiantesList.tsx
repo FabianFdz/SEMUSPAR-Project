@@ -44,7 +44,6 @@ export default function EstudiantesList({ estudiantes }: Props) {
 
   useEffect(() => {
     router.refresh();
-    console.log("rendering...");
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
