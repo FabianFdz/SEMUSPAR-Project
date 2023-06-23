@@ -15,7 +15,6 @@ export default async function handler(
       errorMessage: "URL válida requerida.",
     });
   }
-  console.log("[Server]", sheetId);
   const fullSheetUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}?key=${apiKey}`;
   const responseFullSheet = await axios.get(fullSheetUrl);
 
