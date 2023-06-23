@@ -25,7 +25,7 @@ export default async function handler(
       errorMessage: "Cédula inválida.",
     },
     {
-      valid: validator.isLength(nombre_completo, { min: 1, max: 20 }),
+      valid: validator.isLength(nombre_completo, { min: 2 }),
       errorMessage: "Nombre completo requerido.",
     },
   ];
