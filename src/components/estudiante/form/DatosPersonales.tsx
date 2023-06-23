@@ -19,15 +19,9 @@ export default function DatosPersonales({ register }: DatosPersonalesProps) {
           required
         />
         <InputEstudiante
-          label="Nombre"
+          label="Nombre Completo"
           register={register}
-          name="nombre"
-          required
-        />
-        <InputEstudiante
-          label="Apellidos"
-          register={register}
-          name="apellidos"
+          name="nombreCompleto"
           required
         />
       </div>

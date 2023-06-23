@@ -1,14 +1,12 @@
 import Link from "next/link";
 import { prismaClient } from "@/services/prismaClient";
 import EstudiantesList from "@/components/estudiante/table/EstudiantesList";
-import { GetServerSideProps } from "next";
 
 const fetchEstudiantes = async () => {
   const estudiantes = await prismaClient.estudiante.findMany({
     select: {
       id: true,
-      nombre: true,
-      apellidos: true,
+      nombreCompleto: true,
       estado: true,
       docente: true,
       instrumento: true,
@@ -33,10 +31,10 @@ export default async function Estudiantes() {
         <h1 className="text-xl font-bold text-left">Estudiantes</h1>
         <div className="flex flex-row space-x-2">
           <Link
-            href="/estudiantes/importar"
+            href="/estudiantes/refrescarDatos"
             className="px-3 py-2 bg-blue-900 rounded-md text-white"
           >
-            Importar
+            Actualizar con formulario
           </Link>
           <Link
             href="/estudiantes/agregar"

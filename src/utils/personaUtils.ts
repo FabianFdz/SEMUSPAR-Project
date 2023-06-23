@@ -56,9 +56,20 @@ export function extractFirstNames(fullName: string): string {
  * @returns {string} La cadena de fecha convertida en formato "yyyy-mm-dd".
  */
 export function convertDateStandard(dateString: string) {
+  if (dateString.includes("-")) {
+    return dateString;
+  }
+
   const partes = dateString.split("/");
-  const dia = partes[1].padStart(2, "0");
-  const mes = partes[0].padStart(2, "0");
-  const anio = partes[2];
-  return `${anio}-${mes}-${dia}`;
+  const dia = partes[0].padStart(2, "0");
+  const mes = partes[1].padStart(2, "0");
+  const anioSplitted = partes[2].split("");
+  const currentYear = new Date().getFullYear() % 100;
+  while (anioSplitted[0] === "0") {
+    anioSplitted.shift();
+  }
+  const anio = Number(anioSplitted.join(""));
+  return `${
+    anio < 100 ? (anio - currentYear > 0 ? "19" : "20") : ""
+  }${anio}-${mes}-${dia}`;
 }

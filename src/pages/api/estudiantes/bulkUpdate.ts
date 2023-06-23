@@ -29,14 +29,15 @@ export default async function handler(
       });
 
       if (!estudiante) {
+        const facturacionEstudiante = await prismaClient.facturacion.create({
+          data: {
+            ...data.facturacion,
+          },
+        });
         await prismaClient.estudiante.create({
           data: {
             ...data.estudiante,
-            facturacion: {
-              create: {
-                ...data.facturacion,
-              },
-            },
+            facturacion_id: facturacionEstudiante.id,
             encargados: {
               createMany: {
                 data: [...data.encargados],

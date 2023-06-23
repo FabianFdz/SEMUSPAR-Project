@@ -53,13 +53,10 @@ export const estudiantesColumnsDef = [
     cell: (info) => <p>{info.getValue()}</p>,
     header: () => <Header text="Cédula" />,
   }),
-  columnHelper.accessor((row) => row.nombre, {
-    id: "nombre",
+  columnHelper.accessor((row) => row.nombreCompleto, {
+    id: "nombreCompleto",
     cell: (info) => (
-      <NombreCol
-        email={info.row.original.email}
-        nombre={`${info.getValue()} ${info.row.original.apellidos}`}
-      />
+      <NombreCol email={info.row.original.email} nombre={info.getValue()} />
     ),
     header: () => <Header text="Nombre Completo" />,
   }),

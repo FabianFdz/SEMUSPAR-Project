@@ -30,7 +30,7 @@ export function FacturacionForm({
           required
         />
         <InputFacturacion
-          label="Nombre"
+          label="Nombre Completo"
           register={register}
           name="nombre_completo"
           required

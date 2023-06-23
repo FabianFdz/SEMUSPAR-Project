@@ -1,23 +1,22 @@
-import { EstudianteFullData } from "@/global.types";
-import { Estudiante } from "@prisma/client";
 import axios from "axios";
 import { useState } from "react";
+import { Estudiante } from "@prisma/client";
+import { EstudianteFullData } from "@/global.types";
 
 interface UpdateProps {
   id: Estudiante["id"];
   email: Estudiante["email"];
   estado: Estudiante["estado"];
   cedula: Estudiante["cedula"];
-  nombre: Estudiante["nombre"];
   docente: Estudiante["docente"];
   trabaja: Estudiante["trabaja"];
   telefono: Estudiante["telefono"];
-  apellidos: Estudiante["apellidos"];
   direccion: Estudiante["direccion"];
   adecuacion: Estudiante["adecuacion"];
   instrumento: Estudiante["instrumento"];
   enfermedades: Estudiante["enfermedades"];
   lugar_trabajo: Estudiante["lugar_trabajo"];
+  nombreCompleto: Estudiante["nombreCompleto"];
   grado_academico: Estudiante["grado_academico"];
   tipo_adecuacion: Estudiante["tipo_adecuacion"];
   fecha_nacimiento: Estudiante["fecha_nacimiento"];
@@ -27,8 +26,8 @@ interface UpdateProps {
 }
 
 export function useEstudiante() {
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState<Estudiante | null>(null);
 
   const updateDatosPersonales = async (estudiante: UpdateProps) => {
@@ -39,12 +38,12 @@ export function useEstudiante() {
         "/api/estudiantes/editarDatosPersonales",
         { ...estudiante }
       );
-      setLoading(false);
       setError(null);
+      setLoading(false);
       setData(response.data);
     } catch (error: any) {
-      setLoading(false);
       setData(null);
+      setLoading(false);
       setError(error.response.data.errorMessage);
     }
   };
@@ -57,13 +56,13 @@ export function useEstudiante() {
         "/api/estudiantes/agregarDatosPersonales",
         { ...estudiante }
       );
-      setLoading(false);
       setError(null);
+      setLoading(false);
       setData(response.data);
       return true;
     } catch (error: any) {
-      setLoading(false);
       setData(null);
+      setLoading(false);
       setError(error.response.data.errorMessage);
       return false;
     }
@@ -81,9 +80,11 @@ export function useEstudiante() {
         estudiantesFullData
       );
       setLoading(false);
+      return true;
     } catch (error: any) {
       setLoading(false);
       setError(error.response.data.errorMessage);
+      return false;
     }
   };
 

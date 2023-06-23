@@ -11,8 +11,7 @@ export interface EstudiantesInfoTable {
   estado: boolean;
   fecha_nacimiento: string;
   cedula: string;
-  nombre: string;
-  apellidos: string;
+  nombreCompleto: string;
   email: string | null;
   instrumento: string;
   docente: string | null;
@@ -36,15 +35,10 @@ export default function EstudiantesList({ estudiantes }: Props) {
     return estudiantes.filter(
       (estudiante) =>
         (estado === null || estudiante.estado === estado) &&
-        (estudiante.nombre
+        (estudiante.nombreCompleto
           .toLowerCase()
           .includes(filtro.trim().toLowerCase()) ||
-          estudiante.cedula
-            .toLowerCase()
-            .includes(filtro.trim().toLowerCase()) ||
-          estudiante.apellidos
-            .toLowerCase()
-            .includes(filtro.trim().toLowerCase()))
+          estudiante.cedula.toLowerCase().includes(filtro.trim().toLowerCase()))
     );
   };
 
