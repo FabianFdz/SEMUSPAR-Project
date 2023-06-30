@@ -1,6 +1,5 @@
 import { prismaClient } from "@/services/prismaClient";
 import { NextApiRequest, NextApiResponse } from "next";
-import { EstudianteFullData } from "@/global.types";
 
 export default async function handler(
   req: NextApiRequest,
@@ -8,6 +7,7 @@ export default async function handler(
 ) {
   const { id } = req.body as { id: number };
 
+  // TODO: Change for logic delete instead of hard delete.
   await prismaClient.encargado.deleteMany({
     where: {
       estudiante_id: id,

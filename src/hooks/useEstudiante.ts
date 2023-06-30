@@ -16,7 +16,7 @@ interface UpdateProps {
   instrumento: Estudiante["instrumento"];
   enfermedades: Estudiante["enfermedades"];
   lugar_trabajo: Estudiante["lugar_trabajo"];
-  nombreCompleto: Estudiante["nombreCompleto"];
+  nombre_completo: Estudiante["nombre_completo"];
   grado_academico: Estudiante["grado_academico"];
   tipo_adecuacion: Estudiante["tipo_adecuacion"];
   fecha_nacimiento: Estudiante["fecha_nacimiento"];

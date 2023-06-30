@@ -21,7 +21,7 @@ export default async function handler(
     fecha_retiro,
     enfermedades,
     lugar_trabajo,
-    nombreCompleto,
+    nombre_completo,
     grado_academico,
     tipo_adecuacion,
     fecha_nacimiento,
@@ -30,7 +30,7 @@ export default async function handler(
     consideraciones_medicas,
   } = req.body as Partial<Estudiante>;
 
-  if (!cedula || !nombreCompleto || !fecha_nacimiento || !instrumento) {
+  if (!cedula || !nombre_completo || !fecha_nacimiento || !instrumento) {
     return res.status(400).json({
       errorMessage: "Datos incompletos.",
     });
@@ -43,7 +43,7 @@ export default async function handler(
       errorMessage: "Cédula completa requerida.",
     },
     {
-      valid: validator.isLength(nombreCompleto, { min: 2 }),
+      valid: validator.isLength(nombre_completo, { min: 2 }),
       errorMessage: "Nombre completo requerido.",
     },
     {
@@ -82,7 +82,7 @@ export default async function handler(
       fecha_retiro,
       enfermedades,
       lugar_trabajo,
-      nombreCompleto,
+      nombre_completo,
       grado_academico,
       tipo_adecuacion,
       fecha_nacimiento,

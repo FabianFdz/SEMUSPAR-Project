@@ -21,7 +21,7 @@ export default function DatosPersonales({ register }: DatosPersonalesProps) {
         <InputEstudiante
           label="Nombre Completo"
           register={register}
-          name="nombreCompleto"
+          name="nombre_completo"
           required
         />
       </div>

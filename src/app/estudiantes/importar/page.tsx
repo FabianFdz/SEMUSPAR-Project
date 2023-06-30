@@ -18,7 +18,7 @@ export default function ImportPage() {
   );
   const [fileLoadError, setFileLoadError] = useState<string | null>(null);
   const [dataSample, setDataSample] = useState<Array<{
-    nombreCompleto: string;
+    nombre_completo: string;
     fecha_nacimiento: string;
     fecha_matricula: Date;
     cedula: string;
@@ -43,14 +43,14 @@ export default function ImportPage() {
             parsedData.map(
               ({
                 estudiante: {
-                  nombreCompleto,
+                  nombre_completo,
                   fecha_nacimiento,
                   fecha_matricula,
                   cedula,
                   email,
                 },
               }) => ({
-                nombreCompleto,
+                nombre_completo,
                 fecha_nacimiento,
                 fecha_matricula,
                 cedula,

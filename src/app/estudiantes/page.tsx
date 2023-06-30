@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { prismaClient } from "@/services/prismaClient";
-import EstudiantesList from "@/components/estudiante/table/EstudiantesList";
+import EstudiantesList, {
+  EstudiantesInfoTable,
+} from "@/components/estudiante/table/EstudiantesList";
 
 const fetchEstudiantes = async () => {
   const estudiantes = await prismaClient.estudiante.findMany({
     select: {
       id: true,
-      nombreCompleto: true,
+      nombre_completo: true,
       estado: true,
       docente: true,
       instrumento: true,
@@ -22,7 +24,11 @@ const fetchEstudiantes = async () => {
   return estudiantes;
 };
 
-export default async function Estudiantes() {
+interface Props {
+  searchParams: Partial<EstudiantesInfoTable>;
+}
+
+export default async function Estudiantes({ searchParams }: Props) {
   const estudiantes = await fetchEstudiantes();
 
   return (
@@ -44,7 +50,7 @@ export default async function Estudiantes() {
           </Link>
         </div>
       </div>
-      <EstudiantesList estudiantes={estudiantes} />
+      <EstudiantesList searchParams={searchParams} estudiantes={estudiantes} />
     </main>
   );
 }

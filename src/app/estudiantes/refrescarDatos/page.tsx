@@ -41,7 +41,7 @@ export default function RefreshEstudentsDataPage() {
     if (url) {
       const sheetId = getSheetIdFromUrl(url);
       if (sheetId) {
-        const sheetData = await getEstudiantesFromSheet(sheetId);
+        await getEstudiantesFromSheet(sheetId);
       }
     }
   };

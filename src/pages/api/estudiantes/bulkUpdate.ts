@@ -1,6 +1,7 @@
 import { prismaClient } from "@/services/prismaClient";
 import { NextApiRequest, NextApiResponse } from "next";
 import { EstudianteFullData } from "@/global.types";
+import { isInThisPeriod } from "@/utils/estudianteUtils";
 
 export default async function handler(
   req: NextApiRequest,
@@ -46,17 +47,24 @@ export default async function handler(
           },
         });
       } else {
-        await prismaClient.estudiante.update({
-          data: {
-            ...data.estudiante,
-            fecha_retiro: null,
-            estado_comentario: "",
-            estado: true,
-          },
-          where: {
-            id: estudiante.id,
-          },
-        });
+        if (
+          !isInThisPeriod(
+            estudiante.fecha_matricula,
+            new Date(data.estudiante.fecha_matricula)
+          )
+        ) {
+          await prismaClient.estudiante.update({
+            data: {
+              ...data.estudiante,
+              fecha_retiro: null,
+              estado_comentario: "",
+              estado: true,
+            },
+            where: {
+              id: estudiante.id,
+            },
+          });
+        }
       }
     }
   } catch (err) {

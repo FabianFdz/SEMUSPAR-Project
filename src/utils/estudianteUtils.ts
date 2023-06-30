@@ -1,10 +1,7 @@
+import * as XLSX from "xlsx";
+import { convertDateStandard } from "./personaUtils";
 import { EstudianteFullData, FileRow } from "@/global.types";
 import { Estudiante, Encargado, Facturacion } from "@prisma/client";
-import {
-  extractLastNames,
-  convertDateStandard,
-  extractFirstNames,
-} from "./personaUtils";
 
 /**
  * Parses CSV data of estudiantes and returns an array of EstudianteFullData objects
@@ -65,7 +62,7 @@ export function parseEstudiantesData(
       institucion_academica:
         row["1.8 Institución académica de la persona estudiante"]?.trim(),
       instrumento: row["2.1 Instrumento o Curso"]?.trim(),
-      nombreCompleto:
+      nombre_completo:
         row["1.2 Apellidos y Nombre de la persona estudiante"]?.trim(),
       telefono: row["1.3 Teléfono de la persona estudiante"]?.trim(),
       tipo_adecuacion:
@@ -133,4 +130,46 @@ export function getSheetIdFromUrl(url: string): string | null {
   }
 
   return null;
+}
+
+/**
+ * Exports a JSON object to an Excel file.
+ * @param {object} data - The JSON object to export.
+ * @param {string} filePath - The path where the Excel file should be saved.
+ * @returns A promise that resolves with the file path if the export is successful.
+ */
+export function exportToJsonToExcel(data: object[]) {
+  const worksheet = XLSX.utils.json_to_sheet(data);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Estudiantes");
+  XLSX.writeFile(workbook, "EstudiantesExport.xlsx");
+}
+
+/**
+ * Compares two dates and determines if there are less than "n" months between them.
+ * @param date1 The first date.
+ * @param date2 The second date.
+ * @param n The number of months.
+ * @returns True if there are less than "n" months between the dates, false otherwise.
+ */
+function hasLessThanNMonthsBetween(
+  date1: Date,
+  date2: Date,
+  n: number
+): boolean {
+  const diffYears = date2.getFullYear() - date1.getFullYear();
+  const diffMonths = date2.getMonth() - date1.getMonth();
+  const totalMonths = diffYears * 12 + diffMonths;
+
+  return totalMonths < n;
+}
+
+/**
+ * Compares two dates and determines if it's in the same enroll period.
+ * @param date1 The first date.
+ * @param date2 The second date.
+ * @returns True if it's in the same period of matricula, false otherwise.
+ */
+export function isInThisPeriod(date1: Date, date2: Date): boolean {
+  return hasLessThanNMonthsBetween(date1, date2, 3); // 3 because the period of enroll is every 3 months
 }
