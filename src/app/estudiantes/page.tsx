@@ -6,16 +6,6 @@ import EstudiantesList, {
 
 const fetchEstudiantes = async () => {
   const estudiantes = await prismaClient.estudiante.findMany({
-    select: {
-      id: true,
-      nombre_completo: true,
-      estado: true,
-      docente: true,
-      instrumento: true,
-      cedula: true,
-      email: true,
-      fecha_nacimiento: true,
-    },
     orderBy: {
       id: "asc",
     },

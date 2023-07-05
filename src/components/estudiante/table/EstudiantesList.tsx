@@ -1,8 +1,9 @@
 "use client";
 
-import Filtros from "./Filtros";
-import Table from "@/components/Table";
 import { useState } from "react";
+import Table from "@/components/Table";
+import Filtros from "./filtros/Filtros";
+import { Estudiante } from "@prisma/client";
 import { estudiantesColumnsDef } from "./columns/columnsDef";
 
 export interface EstudiantesInfoTable {
@@ -17,8 +18,8 @@ export interface EstudiantesInfoTable {
 }
 
 interface Props {
-  estudiantes: Array<EstudiantesInfoTable>;
-  searchParams: Partial<EstudiantesInfoTable>;
+  estudiantes: Array<Estudiante>;
+  searchParams: Partial<Estudiante>;
 }
 
 export default function EstudiantesList({ estudiantes, searchParams }: Props) {
@@ -27,7 +28,7 @@ export default function EstudiantesList({ estudiantes, searchParams }: Props) {
   return (
     <>
       <Filtros
-        estudiantes={estudiantes}
+        data={estudiantes}
         searchParams={searchParams}
         filteredEstudiantes={filteredEstudiantes}
         setFilteredEstudiantes={setFilteredEstudiantes}
