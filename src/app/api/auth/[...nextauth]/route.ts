@@ -7,7 +7,8 @@ export const authOptions: AuthOptions = {
       if (profile)
         return (
           profile.email?.endsWith("@emuspar.com") ||
-          profile.email === "fdzfabian@gmail.com"
+          profile.email === "fdzfabian@gmail.com" ||
+          profile.email === "esalasna@gmail.com"
         );
       return false;
     },
