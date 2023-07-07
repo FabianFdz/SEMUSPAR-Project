@@ -10,6 +10,7 @@ import React, {
   useState,
 } from "react";
 import { StatusChip } from "@/components/StatusChip";
+import { Button } from "@/components/lib";
 
 interface Filter {
   filterInfo: CustomFilter<Estudiante>;
@@ -171,13 +172,13 @@ export default function FiltrosAvanzados({
           onChange={(e) => setFilterValueToAdd(e.target.value)}
           className="py-1 px-2 rounded-md bg-white w-2/12 disabled:bg-gray-300 outline-none"
         />
-        <button
-          className="px-4 py-1 text-white bg-blue-900 rounded-md focus:outline-none hover:bg-primary-dark disabled:bg-gray-700 transition-colors"
+        <Button
+          variant="Secondary"
           disabled={!selectedOptionToAdd || !filterValueToAdd}
           onClick={handleAddFilterClick}
         >
           Agregar filtro
-        </button>
+        </Button>
         <button
           className="py-2 px-3 bg-transparent underline text-blue-600 rounded-lg hover:no-underline active:underline"
           onClick={handleLimpiarFiltros}

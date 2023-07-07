@@ -8,6 +8,7 @@ import { useEncargado } from "@/hooks/useEncargado";
 import { Alert, CircularProgress } from "@mui/material";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/lib";
 
 interface Props {
   id: number;
@@ -62,10 +63,7 @@ export default function EstudianteEncargadoForm({
     >
       <EncargadoForm register={register} parentezco={parentezco} />
       {error && <Alert severity="error">{error}</Alert>}
-      <button
-        type="submit"
-        className="py-2 px-3 bg-blue-600 text-white rounded-lg"
-      >
+      <Button type="submit" variant="Primary" disabled={loading}>
         {loading ? (
           <div className="my-auto flex flex-row justify-center items-center space-x-2">
             <CircularProgress color="inherit" size="1rem" />{" "}
@@ -77,7 +75,7 @@ export default function EstudianteEncargadoForm({
             <span className="capitalize">{parentezco.toLowerCase()}</span>
           </>
         )}
-      </button>
+      </Button>
       <p className="font-medium">
         <span className="text-red-600">*</span> Campos requeridos.
       </p>

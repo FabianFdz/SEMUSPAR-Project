@@ -3,6 +3,11 @@ import { prismaClient } from "@/services/prismaClient";
 import EstudiantesList, {
   EstudiantesInfoTable,
 } from "@/components/estudiante/table/EstudiantesList";
+import {
+  baseClasses,
+  primaryClasses,
+  secondaryClasses,
+} from "@/components/lib/Button";
 
 const fetchEstudiantes = async () => {
   const estudiantes = await prismaClient.estudiante.findMany({
@@ -28,13 +33,13 @@ export default async function Estudiantes({ searchParams }: Props) {
         <div className="flex flex-row space-x-2">
           <Link
             href="/estudiantes/refrescarDatos"
-            className="px-3 py-2 bg-blue-900 rounded-md text-white"
+            className={`${baseClasses} ${secondaryClasses}`}
           >
             Actualizar con formulario
           </Link>
           <Link
             href="/estudiantes/agregar"
-            className="px-3 py-2 bg-blue-600 rounded-md text-white"
+            className={`${baseClasses} ${primaryClasses}`}
           >
             Agregar
           </Link>

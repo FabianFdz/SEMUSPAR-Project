@@ -8,6 +8,7 @@ import { Alert, CircularProgress } from "@mui/material";
 import { useFacturacion } from "@/hooks/useFacturacion";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/lib";
 
 interface Props {
   estudiante: {
@@ -63,11 +64,7 @@ export default function EstudianteFacturacionForm({ estudiante }: Props) {
         getValues={getValues}
       />
       {error && <Alert severity="error">{error}</Alert>}
-      <button
-        type="submit"
-        disabled={loading}
-        className="py-2 px-3 bg-blue-600 disabled:bg-gray-400 text-white rounded w-[15rem] items-center"
-      >
+      <Button variant="Primary" type="submit" disabled={loading}>
         {loading ? (
           <div className="my-auto flex flex-row justify-center items-center space-x-2">
             <CircularProgress color="inherit" size="1rem" />{" "}
@@ -76,7 +73,7 @@ export default function EstudianteFacturacionForm({ estudiante }: Props) {
         ) : (
           "Guardar facturación"
         )}
-      </button>
+      </Button>
       <p className="font-medium">
         <span className="text-red-600">*</span> Campos requeridos.
       </p>

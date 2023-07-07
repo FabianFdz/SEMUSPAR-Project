@@ -1,25 +1,20 @@
 "use client";
 
 import { signIn, signOut } from "next-auth/react";
+import { Button } from "./lib";
 
 export const LoginButton = () => {
   return (
-    <button
-      className="rounded-lg py-2 px-3 bg-blue-600 hover:bg-blue-500 transition-all duration-200 text-white"
-      onClick={() => signIn()}
-    >
+    <Button variant="Primary" onClick={() => signIn()}>
       Ingresar
-    </button>
+    </Button>
   );
 };
 
 export const LogoutButton = () => {
   return (
-    <button
-      className="rounded-lg py-2 px-3 bg-blue-600 hover:bg-blue-500 transition-all duration-200 text-white"
-      onClick={() => signOut()}
-    >
+    <Button variant="Danger" onClick={() => signOut()}>
       Cerrar Sesión
-    </button>
+    </Button>
   );
 };

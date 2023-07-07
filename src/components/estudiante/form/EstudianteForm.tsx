@@ -12,6 +12,7 @@ import Educacion from "./EducacionForm";
 import DatosMatricula from "./DatosMatricula";
 import DatosPersonales from "./DatosPersonales";
 import { useEstudiante } from "@/hooks/useEstudiante";
+import { Button } from "@/components/lib";
 
 interface Props {
   estudiante?: Estudiante;
@@ -82,11 +83,7 @@ export default function EstudianteForm({ estudiante }: Props) {
         trabaja={watch("trabaja")}
       />
       {error && <Alert severity="error">{error}</Alert>}
-      <button
-        type="submit"
-        disabled={loading || status !== "authenticated"}
-        className="py-2 px-3 bg-blue-600 disabled:bg-gray-400 text-white rounded w-[15rem] items-center"
-      >
+      <Button type="submit" disabled={loading || status !== "authenticated"}>
         {loading ? (
           <div className="my-auto flex flex-row justify-center items-center space-x-2">
             <CircularProgress color="inherit" size="1rem" />{" "}
@@ -97,7 +94,7 @@ export default function EstudianteForm({ estudiante }: Props) {
         ) : (
           "Agregar"
         )}
-      </button>
+      </Button>
       <p className="font-medium">
         <span className="text-red-600">*</span> Campos requeridos.
       </p>

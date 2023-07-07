@@ -8,6 +8,7 @@ import { Alert, CircularProgress } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { parseEstudiantesData } from "@/utils/estudianteUtils";
 import FechaMatriculaCol from "@/components/estudiante/table/columns/FechaMatriculaCol";
+import { Button } from "@/components/lib";
 
 export default function ImportPage() {
   const router = useRouter();
@@ -100,7 +101,9 @@ export default function ImportPage() {
       {loading && (
         <div className="mx-auto flex flex-col items-center space-y-7">
           <CircularProgress size={50} className="mt-44" />
-          <p className="animate-bounce">Actualizando lista de estudiantes...</p>
+          <p className="animate-bounce">
+            Obteniendo lista de estudiantes desde formulario...
+          </p>
         </div>
       )}
       {!loading && dataSample && (
@@ -158,19 +161,13 @@ export default function ImportPage() {
               </div>
             </div>
           </div>
-          <div className="flex">
-            <button
-              className="px-3 py-2 bg-blue-600 rounded-md text-white w-40 mr-2"
-              onClick={() => importBtnOnClick(false)}
-            >
+          <div className="flex flex-row space-x-2">
+            <Button variant="Primary" onClick={() => importBtnOnClick(false)}>
               Nueva Matricula
-            </button>
-            <button
-              className="px-3 py-2 bg-blue-900 rounded-md text-white w-56"
-              onClick={() => importBtnOnClick(true)}
-            >
+            </Button>
+            <Button variant="Secondary" onClick={() => importBtnOnClick(true)}>
               Actualizar Estudiantes
-            </button>
+            </Button>
           </div>
         </>
       )}

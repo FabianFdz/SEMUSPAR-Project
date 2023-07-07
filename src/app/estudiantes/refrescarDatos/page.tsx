@@ -12,6 +12,7 @@ import { useGoogleSheet } from "@/hooks/useGoogleSheet";
 import { EstudianteFullData } from "@/global.types";
 import FechaMatriculaCol from "@/components/estudiante/table/columns/FechaMatriculaCol";
 import { StatusChip } from "@/components/StatusChip";
+import { Button } from "@/components/lib";
 
 export default function RefreshEstudentsDataPage() {
   const router = useRouter();
@@ -64,12 +65,9 @@ export default function RefreshEstudentsDataPage() {
           placeholder="URL de formulario"
           onChange={(e) => setUrl(e.target.value)}
         />
-        <button
-          className="py-2 px-3 bg-blue-600 disabled:bg-gray-400 text-white rounded w-auto items-center"
-          onClick={getSheetsData}
-        >
+        <Button variant="Primary" onClick={getSheetsData}>
           Obtener datos
-        </button>
+        </Button>
       </div>
       {(loadingEstudiante || loadingGoogleSheet) && (
         <div className="mx-auto flex flex-col items-center space-y-7">
@@ -80,7 +78,7 @@ export default function RefreshEstudentsDataPage() {
       {!(loadingEstudiante || loadingGoogleSheet) && data && (
         <p>
           <strong>Estudiantes a importar en la base de datos:</strong>{" "}
-          {data?.length}
+          <span className="text-lime-600">{data?.length}</span>
         </p>
       )}
       {!(loadingEstudiante || loadingGoogleSheet) &&
@@ -142,19 +140,21 @@ export default function RefreshEstudentsDataPage() {
                 </div>
               </div>
             </div>
-            <div className="flex">
-              <button
-                className="px-3 py-2 bg-blue-600 rounded-md text-white w-40 mr-2"
+            <div className="flex flex-row space-x-2">
+              <Button
+                variant="Primary"
                 onClick={() => importBtnOnClick(false)}
+                title="Actualiza todos los estudiantes a inactivos y agrega los nuevos como activos."
               >
                 Nueva Matricula
-              </button>
-              <button
-                className="px-3 py-2 bg-blue-900 rounded-md text-white w-56"
+              </Button>
+              <Button
+                variant="Secondary"
                 onClick={() => importBtnOnClick(true)}
+                title="Agrega los nuevos estudiantes sin afectar el estado de los estudiantes actuales."
               >
                 Actualizar Estudiantes
-              </button>
+              </Button>
             </div>
           </>
         )}

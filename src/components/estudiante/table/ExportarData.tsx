@@ -1,3 +1,4 @@
+import { Button } from "@/components/lib";
 import { exportToJsonToExcel } from "@/utils/estudianteUtils";
 
 interface Props {
@@ -14,11 +15,8 @@ export default function ExportarData({ data }: Props) {
   };
 
   return (
-    <button
-      className="px-4 py-2 text-white bg-blue-600 rounded-md focus:outline-none hover:bg-primary-dark"
-      onClick={handleExportar}
-    >
+    <Button variant="Secondary" onClick={handleExportar}>
       Exportar
-    </button>
+    </Button>
   );
 }
