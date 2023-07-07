@@ -23,27 +23,33 @@ export const secondaryClasses = `text-blue-600 bg-transparent
 active:bg-blue-200 border border-blue-600 disabled:border-gray-400 
 disabled:text-gray-400 disabled:active:bg-transparent hover:bg-blue-100 disabled:bg-gray-200`;
 
+const classNameWithVariant = (
+  className: ButtonProps["className"],
+  variant: ButtonProps["variant"]
+) => {
+  switch (variant) {
+    case "Primary":
+      return `${className} ${primaryClasses}`;
+    case "Secondary":
+      return `${className} ${secondaryClasses}`;
+    case "Danger":
+      return `${className} ${dangerClasses}`;
+    default:
+      return "";
+  }
+};
+
 export function Button({
   variant = "Primary",
   children,
   className,
   ...rest
 }: ButtonProps) {
-  const classNameWithVariant = () => {
-    switch (variant) {
-      case "Primary":
-        return `${className} ${primaryClasses}`;
-      case "Secondary":
-        return `${className} ${secondaryClasses}`;
-      case "Danger":
-        return `${className} ${dangerClasses}`;
-      default:
-        return "";
-    }
-  };
-
   return (
-    <button {...rest} className={`${baseClasses} ${classNameWithVariant()}`}>
+    <button
+      {...rest}
+      className={`${baseClasses} ${classNameWithVariant(className, variant)}`}
+    >
       {children}
     </button>
   );
