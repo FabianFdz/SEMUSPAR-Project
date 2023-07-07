@@ -6,7 +6,7 @@ interface StatusChipProps {
 export function StatusChip({ active, disabled }: StatusChipProps) {
   return (
     <div
-      className={`flex flex-row items-center px-4 py-3 rounded-full text-sm w-fit justify-start space-x-2 font-semibold ${
+      className={`flex flex-row items-center px-2 py-1 rounded-full text-sm w-fit justify-start space-x-2 font-semibold ${
         !disabled && active
           ? "bg-green-100 text-green-800 border-solid border-[1px] border-green-800"
           : !disabled && !active

@@ -114,7 +114,7 @@ export default function FiltrosAvanzados({
   return (
     <div className="bg-gray-100 rounded w-full p-4 mt-2 flex flex-col">
       <div className="flex flex-row items-center space-x-2 text-center mb-3">
-        <h1>Estado</h1>
+        <label className="font-medium">Estado</label>
         {[true, false].map((status) => (
           <div
             key={status ? "true-status" : "false-status"}
