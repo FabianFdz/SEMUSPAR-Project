@@ -14,7 +14,8 @@ export const estudiantesColumnsDef = [
     id: "id",
     cell: (info) => {
       const isNew =
-        (info.row.original.docente?.toLowerCase().includes("alternativo") || // El docente dice alternativo
+        (info.row.original.docente?.trim() === "" || // Esta vacio
+          info.row.original.docente?.toLowerCase().includes("alternativo") || // El docente dice alternativo
           info.row.original.docente?.toLowerCase().includes("regular")) && // o regular
         info.row.original.estado; // y se encuentra activo
       return (
