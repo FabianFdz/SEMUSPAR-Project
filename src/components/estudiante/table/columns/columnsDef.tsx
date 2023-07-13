@@ -27,10 +27,10 @@ export const estudiantesColumnsDef = [
           </Link>
           {isNew && (
             <div
-              title="Nuevo estudiante"
+              title="Sin profesor asignado"
               className="flex flex-row items-center px-3 py-1 rounded-full bg-purple-100 text-purple-800 border border-purple-800"
             >
-              <p className="text-sm font-medium">Nuevo</p>
+              <p className="text-sm font-medium">Sin Profesor</p>
             </div>
           )}
         </div>
